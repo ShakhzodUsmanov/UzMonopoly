@@ -4,6 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "dev:server": "pnpm --filter @uzmonopoly/server run dev",
+    "dev:client": "pnpm --filter @uzmonopoly/client run dev",
+    "start:server": "pnpm --filter @uzmonopoly/server run start",
     "build": "pnpm -r run build",
     "test": "vitest run",
     "test:watch": "vitest",
