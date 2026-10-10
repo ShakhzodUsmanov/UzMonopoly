@@ -85,6 +85,14 @@ export const ClientUseJailCardSchema = z.object({
   type: z.literal('useJailCard'),
 });
 
+export const ClientPayDebtSchema = z.object({
+  type: z.literal('payDebt'),
+});
+
+export const ClientDeclareBankruptcySchema = z.object({
+  type: z.literal('declareBankruptcy'),
+});
+
 export const ClientEndTurnSchema = z.object({
   type: z.literal('endTurn'),
 });
@@ -111,6 +119,8 @@ export const ClientActionSchema = z.discriminatedUnion('type', [
   ClientAnswerTradeSchema,
   ClientPayJailFineSchema,
   ClientUseJailCardSchema,
+  ClientPayDebtSchema,
+  ClientDeclareBankruptcySchema,
   ClientEndTurnSchema,
   ClientChatSchema,
 ]);
