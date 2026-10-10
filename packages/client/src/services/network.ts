@@ -50,12 +50,18 @@ export class NetworkService {
   }
 
   // --- 1. Online Colyseus Room Methods ---
-  public async createOnlineRoom(playerName: string, maxPlayers = 4, isPrivate = false): Promise<string> {
+  public async createOnlineRoom(
+    playerName: string,
+    maxPlayers = 4,
+    isPrivate = false,
+    mode: 'full' | 'short' = 'full',
+  ): Promise<string> {
     this.isSoloMode = false;
     const room = await this.client.create('game', {
       playerName,
       maxPlayers,
       isPrivate,
+      mode,
     });
     this.attachRoomListeners(room);
     this.room = room;
@@ -122,7 +128,11 @@ export class NetworkService {
   }
 
   // --- 2. Offline / Solo Sandbox Mode vs 3 AI Bots ---
-  public startSoloGame(playerName: string, myToken: TokenId = 'doppi') {
+  public startSoloGame(
+    playerName: string,
+    myToken: TokenId = 'doppi',
+    mode: 'full' | 'short' = 'full',
+  ) {
     this.isSoloMode = true;
     const players = [
       { id: 'player-me', name: playerName, token: myToken, color: '#3B82F6', isHost: true },
@@ -132,13 +142,18 @@ export class NetworkService {
     ];
 
     this.localRng = createPRNG(Date.now());
-    this.localGameState = createInitialGameState(players, {
-      roomCode: 'SOLO1',
-      isPrivate: true,
-      maxPlayers: 4,
-      turnTimeoutSec: 60,
-      mode: 'full',
-    }, this.localRng);
+    this.localGameState = createInitialGameState(
+      players,
+      {
+        roomCode: 'SOLO1',
+        isPrivate: true,
+        maxPlayers: 4,
+        turnTimeoutSec: 60,
+        mode,
+        shortGameMinutes: 30,
+      },
+      this.localRng,
+    );
 
     // Mark other players as bots
     for (let i = 1; i < this.localGameState.players.length; i++) {

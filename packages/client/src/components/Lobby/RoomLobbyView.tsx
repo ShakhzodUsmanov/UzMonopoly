@@ -4,7 +4,7 @@ import { TOKENS, PLAYER_COLORS } from '@uzmonopoly/shared';
 import { TokenIcon } from '../Tokens/TokenIcon.js';
 import type { LobbyInfo } from '../../services/network.js';
 import type { Translations } from '../../i18n.js';
-import { Copy, Check, Crown, Play, UserMinus, LogOut } from 'lucide-react';
+import { Copy, Check, Crown, Play, UserMinus, LogOut, Bot } from 'lucide-react';
 
 interface RoomLobbyViewProps {
   lobby: LobbyInfo;
@@ -12,6 +12,7 @@ interface RoomLobbyViewProps {
   onReady: () => void;
   onSetToken: (token: TokenId, color: string) => void;
   onKickPlayer: (playerId: string) => void;
+  onAddBot?: () => void;
   onStartGame: () => void;
   onLeave: () => void;
   t: Translations;
@@ -23,6 +24,7 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
   onReady,
   onSetToken,
   onKickPlayer,
+  onAddBot,
   onStartGame,
   onLeave,
   t,
@@ -192,6 +194,18 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
             );
           })}
         </div>
+
+        {isHost && onAddBot && lobby.players.length < lobby.maxPlayers && (
+          <button
+            className="btn btn-outline"
+            style={{ marginTop: 14, display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13 }}
+            onClick={onAddBot}
+            id="btn-add-ai-bot"
+          >
+            <Bot size={16} color="#8B5CF6" />
+            <span>+ {t.addBot}</span>
+          </button>
+        )}
       </div>
 
       {/* Customization: Token & Color Picker for Me */}

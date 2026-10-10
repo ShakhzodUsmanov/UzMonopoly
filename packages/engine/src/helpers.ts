@@ -80,20 +80,6 @@ export function getNextActivePlayerIndex(state: GameState, currentIndex: number)
   return next;
 }
 
-export function checkGameOver(state: GameState): {
-  isGameOver: boolean;
-  winnerId?: string;
-} {
-  const activePlayers = state.players.filter((p) => !p.bankrupt);
-  if (activePlayers.length <= 1) {
-    return {
-      isGameOver: true,
-      winnerId: activePlayers[0]?.id,
-    };
-  }
-  return { isGameOver: false };
-}
-
 export function calculateNetWorth(state: GameState, playerId: string): number {
   const player = getPlayer(state, playerId);
   if (!player) return 0;
@@ -113,6 +99,44 @@ export function calculateNetWorth(state: GameState, playerId: string): number {
   }
 
   return netWorth;
+}
+
+export function checkGameOver(state: GameState): {
+  isGameOver: boolean;
+  winnerId?: string;
+  reason?: 'ELIMINATION' | 'SHORT_GAME_LIMIT';
+} {
+  const activePlayers = state.players.filter((p) => !p.bankrupt);
+  if (activePlayers.length <= 1) {
+    return {
+      isGameOver: true,
+      winnerId: activePlayers[0]?.id,
+      reason: 'ELIMINATION',
+    };
+  }
+
+  // Short Game Mode timeout / max turns
+  if (state.settings?.mode === 'short') {
+    const maxShortTurns = (state.settings.shortGameMinutes ?? 30) * 4;
+    if (state.seq >= maxShortTurns) {
+      let highestNetWorth = -Infinity;
+      let winnerId = activePlayers[0]?.id;
+      for (const p of activePlayers) {
+        const nw = calculateNetWorth(state, p.id);
+        if (nw > highestNetWorth) {
+          highestNetWorth = nw;
+          winnerId = p.id;
+        }
+      }
+      return {
+        isGameOver: true,
+        winnerId,
+        reason: 'SHORT_GAME_LIMIT',
+      };
+    }
+  }
+
+  return { isGameOver: false };
 }
 
 export function createEvent(

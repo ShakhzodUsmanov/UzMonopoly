@@ -3,7 +3,7 @@ import type { Translations, Locale } from '../../i18n.js';
 import { PlusCircle, LogIn, Bot, Globe, Shield, Users, Zap } from 'lucide-react';
 
 interface HomeViewProps {
-  onCreateRoom: (playerName: string, maxPlayers: number, isPrivate: boolean) => void;
+  onCreateRoom: (playerName: string, maxPlayers: number, isPrivate: boolean, mode: 'full' | 'short') => void;
   onJoinRoom: (roomCode: string, playerName: string) => void;
   onStartSolo: (playerName: string) => void;
   locale: Locale;
@@ -25,6 +25,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
   const [roomCode, setRoomCode] = useState('');
   const [maxPlayers, setMaxPlayers] = useState(4);
   const [isPrivate, setIsPrivate] = useState(false);
+  const [gameMode, setGameMode] = useState<'full' | 'short'>('full');
   const [mode, setMode] = useState<'create' | 'join' | null>(null);
 
   const saveNickname = (name: string) => {
@@ -36,7 +37,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
     e.preventDefault();
     if (!playerName.trim()) return;
     saveNickname(playerName);
-    onCreateRoom(playerName.trim(), maxPlayers, isPrivate);
+    onCreateRoom(playerName.trim(), maxPlayers, isPrivate, gameMode);
   };
 
   const handleJoinSubmit = (e: React.FormEvent) => {
@@ -199,6 +200,30 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     {num}
                   </button>
                 ))}
+              </div>
+            </div>
+
+            <div>
+              <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 6 }}>
+                {t.mode}
+              </label>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button
+                  type="button"
+                  onClick={() => setGameMode('full')}
+                  className={`btn ${gameMode === 'full' ? 'btn-primary' : 'btn-outline'}`}
+                  style={{ flex: 1, padding: 10, fontSize: 13 }}
+                >
+                  {t.modeFull}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setGameMode('short')}
+                  className={`btn ${gameMode === 'short' ? 'btn-gold' : 'btn-outline'}`}
+                  style={{ flex: 1, padding: 10, fontSize: 13 }}
+                >
+                  ⚡ {t.modeShort}
+                </button>
               </div>
             </div>
 

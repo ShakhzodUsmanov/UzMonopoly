@@ -30,6 +30,7 @@ export interface LobbyPlayer {
   isReady: boolean;
   isHost: boolean;
   reconnectToken: string;
+  isBot?: boolean;
 }
 
 export interface GameRoomOptions {
@@ -302,6 +303,37 @@ export class GameRoom extends Room {
       return;
     }
 
+    if (message.type === 'addBot' && player.isHost) {
+      if (this.lobbyPlayers.length >= this.maxPlayers) {
+        client.send('error', { code: 'ROOM_FULL', message: 'Room has reached max players' });
+        return;
+      }
+      const botIdx = this.lobbyPlayers.filter((p) => p.isBot).length + 1;
+      const botNames = ['Bobur Bot', 'Charos Bot', 'Dilnoza Bot', 'Erkin Bot', 'Farrukh Bot'];
+      const botName = botNames[botIdx - 1] || `AI Bot ${botIdx}`;
+
+      const availableToken =
+        TOKENS.find((t) => !this.lobbyPlayers.some((p) => p.token === t.id))?.id || 'damas';
+
+      const availableColor =
+        PLAYER_COLORS.find((c) => !this.lobbyPlayers.some((p) => p.color === c)) || '#10B981';
+
+      const botPlayer: LobbyPlayer = {
+        id: `bot-${Date.now().toString(36)}-${botIdx}`,
+        name: botName,
+        token: availableToken,
+        color: availableColor,
+        isReady: true,
+        isHost: false,
+        reconnectToken: `bot-${Date.now().toString(36)}-${botIdx}`,
+        isBot: true,
+      };
+
+      this.lobbyPlayers.push(botPlayer);
+      this.broadcastLobbyUpdate();
+      return;
+    }
+
     if (message.type === 'startGame' && player.isHost) {
       if (this.lobbyPlayers.length < 2) {
         client.send('error', { code: 'NOT_ENOUGH_PLAYERS', message: 'Need at least 2 players' });
@@ -324,6 +356,7 @@ export class GameRoom extends Room {
       maxPlayers: this.maxPlayers,
       turnTimeoutSec: this.turnTimeoutSec,
       mode: this.mode,
+      shortGameMinutes: 30,
     };
 
     const playersInput = this.lobbyPlayers.map((p) => ({
@@ -332,6 +365,7 @@ export class GameRoom extends Room {
       token: p.token,
       color: p.color,
       isHost: p.isHost,
+      isBot: p.isBot,
     }));
 
     // Server-authoritative random seed
@@ -346,6 +380,7 @@ export class GameRoom extends Room {
     this.broadcast('state', this.gameState);
 
     this.resetTurnTimer();
+    this.checkAndTriggerBotTurn();
   }
 
   private handleGameAction(client: Client, playerId: string, rawAction: unknown) {

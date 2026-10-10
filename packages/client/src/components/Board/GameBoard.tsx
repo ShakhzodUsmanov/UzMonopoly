@@ -263,6 +263,27 @@ export const GameBoard: React.FC<GameBoardProps> = ({
           strokeWidth="1.5"
         />
 
+        {/* Uzbek Suzani Medallion Rosette */}
+        <g transform="translate(500, 500)" opacity="0.18" pointerEvents="none">
+          <circle r="180" fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="6,4" />
+          <circle r="150" fill="none" stroke="#00A3C4" strokeWidth="1.5" />
+          <circle r="110" fill="none" stroke="#10B981" strokeWidth="2" />
+          <circle r="70" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          <circle r="25" fill="#F59E0B" opacity="0.3" />
+          {/* 8-pointed star rosette petals */}
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
+            <g key={angle} transform={`rotate(${angle})`}>
+              <path
+                d="M 0 0 C 30 -50 40 -120 0 -160 C -40 -120 -30 -50 0 0 Z"
+                fill="none"
+                stroke="#F59E0B"
+                strokeWidth="1.5"
+              />
+              <circle cx="0" cy="-130" r="6" fill="#00A3C4" opacity="0.6" />
+            </g>
+          ))}
+        </g>
+
         {/* Board Title Center Graphic */}
         <g style={{ pointerEvents: 'none' }}>
           <text

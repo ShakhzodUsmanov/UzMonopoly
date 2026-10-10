@@ -116,11 +116,16 @@ export const App: React.FC = () => {
   };
 
   // Actions
-  const handleCreateRoom = async (playerName: string, maxPlayers: number, isPrivate: boolean) => {
+  const handleCreateRoom = async (
+    playerName: string,
+    maxPlayers: number,
+    isPrivate: boolean,
+    mode: 'full' | 'short' = 'full',
+  ) => {
     try {
-      await networkService.createOnlineRoom(playerName, maxPlayers, isPrivate);
+      await networkService.createOnlineRoom(playerName, maxPlayers, isPrivate, mode);
     } catch {
-      networkService.startSoloGame(playerName);
+      networkService.startSoloGame(playerName, 'doppi', mode);
     }
   };
 
@@ -138,6 +143,58 @@ export const App: React.FC = () => {
     networkService.startSoloGame(playerName);
   };
 
+  // Keyboard Shortcuts (Space/R: Roll, B: Buy, D: Decline, E: End Turn, Esc: Close)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        setSelectedTile(null);
+        setManagedTile(null);
+        setActiveCard(null);
+        setIsTradeOpen(false);
+        return;
+      }
+
+      if (screen !== 'game' || !gameState) return;
+
+      const activePlayer = gameState.players[gameState.turnIndex];
+      const isMyTurn = activePlayer?.id === myPlayerId;
+
+      if (e.code === 'Space' || e.code === 'KeyR') {
+        if (isMyTurn && gameState.phase === 'ROLL') {
+          e.preventDefault();
+          audioService.playDiceRoll();
+          networkService.sendAction({ type: 'rollDice' });
+        }
+      } else if (e.code === 'KeyB') {
+        if (isMyTurn && gameState.phase === 'BUY_DECISION') {
+          e.preventDefault();
+          audioService.playCoin();
+          networkService.sendAction({ type: 'buy' });
+        }
+      } else if (e.code === 'KeyD') {
+        if (isMyTurn && gameState.phase === 'BUY_DECISION') {
+          e.preventDefault();
+          audioService.playClick();
+          networkService.sendAction({ type: 'declineBuy' });
+        }
+      } else if (e.code === 'KeyE') {
+        if (isMyTurn && gameState.phase === 'POST_ROLL') {
+          e.preventDefault();
+          audioService.playClick();
+          networkService.sendAction({ type: 'endTurn' });
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [screen, gameState, myPlayerId]);
+
   const handleReadyToggle = () => {
     audioService.playClick();
     networkService.sendAction({ type: 'ready' });
@@ -151,6 +208,11 @@ export const App: React.FC = () => {
   const handleKickPlayer = (playerId: string) => {
     audioService.playClick();
     networkService.sendAction({ type: 'kickPlayer', playerId });
+  };
+
+  const handleAddBot = () => {
+    audioService.playClick();
+    networkService.sendAction({ type: 'addBot' });
   };
 
   const handleStartGame = () => {
@@ -241,6 +303,7 @@ export const App: React.FC = () => {
           onReady={handleReadyToggle}
           onSetToken={handleSetToken}
           onKickPlayer={handleKickPlayer}
+          onAddBot={handleAddBot}
           onStartGame={handleStartGame}
           onLeave={handleLeave}
           t={t}
@@ -272,6 +335,11 @@ export const App: React.FC = () => {
               <span className="badge badge-gold" style={{ fontSize: 10 }}>
                 Xona: #{gameState.settings?.roomCode || 'SOLO'}
               </span>
+              {gameState.settings?.mode === 'short' && (
+                <span className="badge badge-emerald" style={{ fontSize: 10 }}>
+                  ⚡ {t.modeShort} ({Math.max(0, ((gameState.settings.shortGameMinutes ?? 30) * 4) - gameState.seq)} yurish)
+                </span>
+              )}
             </div>
 
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -484,6 +552,35 @@ export const App: React.FC = () => {
           onClose={() => setSelectedTile(null)}
         />
       )}
+
+      {/* Persistent Legal Disclaimer & Footer */}
+      <footer
+        style={{
+          borderTop: '1px solid var(--border-subtle)',
+          padding: '16px 20px',
+          background: 'rgba(11, 17, 32, 0.95)',
+          fontSize: 12,
+          color: 'var(--text-muted)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 6,
+          textAlign: 'center',
+          marginTop: 'auto',
+        }}
+      >
+        <div style={{ maxWidth: 840, lineHeight: 1.4, opacity: 0.85 }}>
+          ⚖️ {t.footerDisclaimer}
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+          <span style={{ color: 'var(--text-dim)', fontSize: 11 }}>
+            ⌨️ {t.keyboardShortcutsGuide}
+          </span>
+          <span style={{ color: 'var(--accent-gold)', fontWeight: 700, fontSize: 11 }}>
+            UzMonopoly • UzBiznes v1.0
+          </span>
+        </div>
+      </footer>
 
       {/* Responsive Breakpoints CSS */}
       <style>{`
