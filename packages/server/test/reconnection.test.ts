@@ -30,6 +30,7 @@ describe('Server Reconnection and Bot Takeover', () => {
 
     const room1 = await client1.create('game', { playerName: 'Alice' });
     const p1Init = await new Promise<any>((res) => room1.onMessage('init', res));
+    expect(p1Init.playerId).toBeDefined();
 
     const room2 = await client2.joinById(room1.roomId, { playerName: 'Bob' });
     const p2Init = await new Promise<any>((res) => room2.onMessage('init', res));
@@ -65,7 +66,9 @@ describe('Server Reconnection and Bot Takeover', () => {
     expect(reconnectedRoom.roomId).toBe(room1.roomId);
 
     // Verify Bob is now connected again
-    const stateAfterReconnect = await new Promise<any>((res) => reconnectedRoom.onMessage('state', res));
+    const stateAfterReconnect = await new Promise<any>((res) =>
+      reconnectedRoom.onMessage('state', res),
+    );
     const bobReconnected = stateAfterReconnect.players.find((p: any) => p.name === 'Bob');
     expect(bobReconnected.connected).toBe(true);
 

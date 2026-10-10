@@ -366,7 +366,8 @@ export const DICTIONARY: Record<Locale, Translations> = {
       sellBuildings: 'Sotiladigan binolar',
       mortgageProperties: 'Garovga qo‘yiladigan mulklar',
       declareBankruptcy: 'Bankrot deb tan olish',
-      confirmBankruptcy: 'Haqiqatan ham bankrotlik e‘lon qilmoqchimisiz? Barcha mulklaringiz musodara qilinadi!',
+      confirmBankruptcy:
+        'Haqiqatan ham bankrotlik e‘lon qilmoqchimisiz? Barcha mulklaringiz musodara qilinadi!',
     },
     gameOverModal: {
       victoryTitle: 'O‘YIN G‘OLIBI ANIQLANDI!',
@@ -427,8 +428,10 @@ export const DICTIONARY: Record<Locale, Translations> = {
       tulpar: 'Tulpar (Qanotli ot)',
     },
 
-    footerDisclaimer: 'UzMonopoly / UzBiznes — O‘zbekiston milliy biznes o‘yini. Loyiha eslatib o‘tilgan brendlar (Uzum, Korzinka, Payme, Click, Humo, Uzcard va b.) bilan rasmiy bog‘liq emas. Barcha nomlar o‘yin va ko‘ngilochar maqsadlarda ishlatilgan.',
-    keyboardShortcutsGuide: 'Tugmalar: Probel / R — Tosh tashlash, B — Sotib olish, D — Auksion, E — Yurishni tugatish, Esc — Yopish',
+    footerDisclaimer:
+      'UzMonopoly / UzBiznes — O‘zbekiston milliy biznes o‘yini. Loyiha eslatib o‘tilgan brendlar (Uzum, Korzinka, Payme, Click, Humo, Uzcard va b.) bilan rasmiy bog‘liq emas. Barcha nomlar o‘yin va ko‘ngilochar maqsadlarda ishlatilgan.',
+    keyboardShortcutsGuide:
+      'Tugmalar: Probel / R — Tosh tashlash, B — Sotib olish, D — Auksion, E — Yurishni tugatish, Esc — Yopish',
     addBot: 'AI Bot qo‘shish',
     shortGameRemaining: 'Qisqa o‘yin: qolgan yurishlar',
   },
@@ -637,8 +640,10 @@ export const DICTIONARY: Record<Locale, Translations> = {
       tulpar: 'Tulpar (Крылатый конь)',
     },
 
-    footerDisclaimer: 'UzMonopoly / UzBiznes — Узбекская национальная бизнес-игра. Проект не связан с упомянутыми компаниями (Uzum, Korzinka, Payme, Click, Humo, Uzcard и др.). Названия используются исключительно в игровых и развлекательных целях.',
-    keyboardShortcutsGuide: 'Горячие клавиши: Пробел / R — Бросить кубики, B — Купить, D — На аукцион, E — Завершить ход, Esc — Закрыть',
+    footerDisclaimer:
+      'UzMonopoly / UzBiznes — Узбекская национальная бизнес-игра. Проект не связан с упомянутыми компаниями (Uzum, Korzinka, Payme, Click, Humo, Uzcard и др.). Названия используются исключительно в игровых и развлекательных целях.',
+    keyboardShortcutsGuide:
+      'Горячие клавиши: Пробел / R — Бросить кубики, B — Купить, D — На аукцион, E — Завершить ход, Esc — Закрыть',
     addBot: 'Добавить AI Бота',
     shortGameRemaining: 'Быстрый матч: ходов осталось',
   },
@@ -847,8 +852,10 @@ export const DICTIONARY: Record<Locale, Translations> = {
       tulpar: 'Tulpar (Winged Horse)',
     },
 
-    footerDisclaimer: 'UzMonopoly / UzBiznes — Uzbek national business board game. This project is not affiliated with the mentioned brands (Uzum, Korzinka, Payme, Click, Humo, Uzcard, etc.). Names are used solely for gameplay and entertainment purposes.',
-    keyboardShortcutsGuide: 'Shortcuts: Space / R — Roll Dice, B — Buy, D — Auction, E — End Turn, Esc — Close',
+    footerDisclaimer:
+      'UzMonopoly / UzBiznes — Uzbek national business board game. This project is not affiliated with the mentioned brands (Uzum, Korzinka, Payme, Click, Humo, Uzcard, etc.). Names are used solely for gameplay and entertainment purposes.',
+    keyboardShortcutsGuide:
+      'Shortcuts: Space / R — Roll Dice, B — Buy, D — Auction, E — End Turn, Esc — Close',
     addBot: 'Add AI Bot',
     shortGameRemaining: 'Speed Game: turns remaining',
   },

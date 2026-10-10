@@ -48,7 +48,13 @@ export class NetworkService {
   public onStateUpdate?: (state: GameState) => void;
   public onLobbyUpdate?: (lobby: LobbyInfo) => void;
   public onGameEvent?: (event: GameEvent) => void;
-  public onChatMessage?: (msg: { id: string; sender: string; text: string; color: string; time: string }) => void;
+  public onChatMessage?: (msg: {
+    id: string;
+    sender: string;
+    text: string;
+    color: string;
+    time: string;
+  }) => void;
   public onError?: (error: { code: string; message: string }) => void;
 
   constructor() {
@@ -146,9 +152,27 @@ export class NetworkService {
     this.isSoloMode = true;
     const players = [
       { id: 'player-me', name: playerName, token: myToken, color: '#3B82F6', isHost: true },
-      { id: 'bot-1', name: 'Bobur Bot', token: 'choynak' as TokenId, color: '#10B981', isHost: false },
-      { id: 'bot-2', name: 'Charos Bot', token: 'qozon' as TokenId, color: '#F59E0B', isHost: false },
-      { id: 'bot-3', name: 'Dilnoza Bot', token: 'tarvuz' as TokenId, color: '#EF4444', isHost: false },
+      {
+        id: 'bot-1',
+        name: 'Bobur Bot',
+        token: 'choynak' as TokenId,
+        color: '#10B981',
+        isHost: false,
+      },
+      {
+        id: 'bot-2',
+        name: 'Charos Bot',
+        token: 'qozon' as TokenId,
+        color: '#F59E0B',
+        isHost: false,
+      },
+      {
+        id: 'bot-3',
+        name: 'Dilnoza Bot',
+        token: 'tarvuz' as TokenId,
+        color: '#EF4444',
+        isHost: false,
+      },
     ];
 
     this.localRng = createPRNG(Date.now());

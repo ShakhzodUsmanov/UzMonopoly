@@ -11,9 +11,7 @@ interface PropertyCardModalProps {
   onClose: () => void;
 }
 
-const GROUP_COLORS = Object.fromEntries(
-  COLOR_GROUPS.map((g) => [g.id, g.color]),
-);
+const GROUP_COLORS = Object.fromEntries(COLOR_GROUPS.map((g) => [g.id, g.color]));
 
 export const PropertyCardModal: React.FC<PropertyCardModalProps> = ({
   tile,
@@ -65,10 +63,25 @@ export const PropertyCardModal: React.FC<PropertyCardModalProps> = ({
           >
             <X size={16} />
           </button>
-          <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', opacity: 0.9 }}>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: '1.5px',
+              textTransform: 'uppercase',
+              opacity: 0.9,
+            }}
+          >
             MULK HUJJATI
           </div>
-          <h3 style={{ fontSize: 20, fontWeight: 800, marginTop: 4, fontFamily: 'var(--font-heading)' }}>
+          <h3
+            style={{
+              fontSize: 20,
+              fontWeight: 800,
+              marginTop: 4,
+              fontFamily: 'var(--font-heading)',
+            }}
+          >
             {tile.name}
           </h3>
           {tile.price && (
@@ -82,36 +95,73 @@ export const PropertyCardModal: React.FC<PropertyCardModalProps> = ({
         <div style={{ padding: 20 }}>
           {tile.type === 'PROPERTY' ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, fontSize: 13 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: 6, borderBottom: '1px solid var(--border-subtle)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  paddingBottom: 6,
+                  borderBottom: '1px solid var(--border-subtle)',
+                }}
+              >
                 <span>Oddiy ijara:</span>
-                <span style={{ fontWeight: 700 }}>{calculateRent(baseRent, 0, false, false)} so‘m</span>
+                <span style={{ fontWeight: 700 }}>
+                  {calculateRent(baseRent, 0, false, false)} so‘m
+                </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>Monopoliya bilan:</span>
-                <span style={{ fontWeight: 600 }}>{calculateRent(baseRent, 0, true, false)} so‘m</span>
+                <span style={{ fontWeight: 600 }}>
+                  {calculateRent(baseRent, 0, true, false)} so‘m
+                </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>1 ta filial bilan:</span>
-                <span style={{ fontWeight: 600 }}>{calculateRent(baseRent, 1, false, false)} so‘m</span>
+                <span style={{ fontWeight: 600 }}>
+                  {calculateRent(baseRent, 1, false, false)} so‘m
+                </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>2 ta filial bilan:</span>
-                <span style={{ fontWeight: 600 }}>{calculateRent(baseRent, 2, false, false)} so‘m</span>
+                <span style={{ fontWeight: 600 }}>
+                  {calculateRent(baseRent, 2, false, false)} so‘m
+                </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>3 ta filial bilan:</span>
-                <span style={{ fontWeight: 600 }}>{calculateRent(baseRent, 3, false, false)} so‘m</span>
+                <span style={{ fontWeight: 600 }}>
+                  {calculateRent(baseRent, 3, false, false)} so‘m
+                </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>4 ta filial bilan:</span>
-                <span style={{ fontWeight: 600 }}>{calculateRent(baseRent, 4, false, false)} so‘m</span>
+                <span style={{ fontWeight: 600 }}>
+                  {calculateRent(baseRent, 4, false, false)} so‘m
+                </span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#F59E0B', fontWeight: 700 }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  color: '#F59E0B',
+                  fontWeight: 700,
+                }}
+              >
                 <span>Bosh ofis (Mehmonxona):</span>
                 <span>{calculateRent(baseRent, 5, false, false)} so‘m</span>
               </div>
 
-              <div style={{ marginTop: 12, paddingTop: 12, borderTop: '1px solid var(--border-subtle)', display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: 'var(--text-muted)' }}>
+              <div
+                style={{
+                  marginTop: 12,
+                  paddingTop: 12,
+                  borderTop: '1px solid var(--border-subtle)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                  fontSize: 12,
+                  color: 'var(--text-muted)',
+                }}
+              >
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span>Har bir filial narxi:</span>
                   <span style={{ color: 'var(--text-main)' }}>{houseCost} so‘m</span>
@@ -121,7 +171,13 @@ export const PropertyCardModal: React.FC<PropertyCardModalProps> = ({
                   <span style={{ color: 'var(--text-main)' }}>{mortgageValue} so‘m</span>
                 </div>
                 {tileState && (
-                  <div style={{ display: 'flex', justifyContent: 'space-between', color: tileState.mortgaged ? '#EF4444' : '#10B981' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      color: tileState.mortgaged ? '#EF4444' : '#10B981',
+                    }}
+                  >
                     <span>Holati:</span>
                     <span>{tileState.mortgaged ? 'Garovda' : `${tileState.houses} ta bino`}</span>
                   </div>
@@ -129,7 +185,14 @@ export const PropertyCardModal: React.FC<PropertyCardModalProps> = ({
               </div>
             </div>
           ) : (
-            <div style={{ textAlign: 'center', padding: '16px 0', color: 'var(--text-muted)', fontSize: 14 }}>
+            <div
+              style={{
+                textAlign: 'center',
+                padding: '16px 0',
+                color: 'var(--text-muted)',
+                fontSize: 14,
+              }}
+            >
               Maxsus maydon: <strong style={{ color: 'var(--text-main)' }}>{tile.name}</strong>
             </div>
           )}

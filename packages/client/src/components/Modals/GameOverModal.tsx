@@ -21,8 +21,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   onBackHome,
   t,
 }) => {
-  const winner =
-    gameState.players.find((p) => !p.bankrupt) || gameState.players[0];
+  const winner = gameState.players.find((p) => !p.bankrupt) || gameState.players[0];
 
   const winnerToken = TOKENS.find((tok) => tok.id === winner?.token);
 
@@ -58,7 +57,11 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   );
 
   return (
-    <div className="modal-overlay" id="modal-game-over" style={{ backdropFilter: 'blur(10px)', zIndex: 1100 }}>
+    <div
+      className="modal-overlay"
+      id="modal-game-over"
+      style={{ backdropFilter: 'blur(10px)', zIndex: 1100 }}
+    >
       <div
         className="modal-content animate-fade-in"
         style={{
@@ -74,7 +77,8 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
         {/* Golden Trophy Banner */}
         <div
           style={{
-            background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%)',
+            background:
+              'linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%)',
             padding: '36px 24px 20px',
             position: 'relative',
           }}

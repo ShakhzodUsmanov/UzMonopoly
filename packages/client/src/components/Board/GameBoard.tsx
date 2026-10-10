@@ -244,7 +244,14 @@ export const GameBoard: React.FC<GameBoardProps> = ({
               stroke="rgba(245, 158, 11, 0.05)"
               strokeWidth="1.5"
             />
-            <circle cx="30" cy="30" r="10" fill="none" stroke="rgba(0, 163, 196, 0.04)" strokeWidth="1" />
+            <circle
+              cx="30"
+              cy="30"
+              r="10"
+              fill="none"
+              stroke="rgba(0, 163, 196, 0.04)"
+              strokeWidth="1"
+            />
           </pattern>
         </defs>
 

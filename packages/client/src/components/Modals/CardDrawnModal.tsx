@@ -11,12 +11,7 @@ interface CardDrawnModalProps {
   t: Translations;
 }
 
-export const CardDrawnModal: React.FC<CardDrawnModalProps> = ({
-  card,
-  onClose,
-  locale,
-  t,
-}) => {
+export const CardDrawnModal: React.FC<CardDrawnModalProps> = ({ card, onClose, locale, t }) => {
   const isImkon = card.type === 'imkon';
   const themeColor = isImkon ? '#F59E0B' : '#10B981';
   const typeTitle = isImkon ? t.cardModal.imkonTitle : t.cardModal.xazinaTitle;
@@ -99,7 +94,9 @@ export const CardDrawnModal: React.FC<CardDrawnModalProps> = ({
         </div>
 
         {/* Card Body */}
-        <div style={{ padding: '24px 24px 20px', display: 'flex', flexDirection: 'column', gap: 18 }}>
+        <div
+          style={{ padding: '24px 24px 20px', display: 'flex', flexDirection: 'column', gap: 18 }}
+        >
           {/* Description Text */}
           <div
             style={{
@@ -128,14 +125,18 @@ export const CardDrawnModal: React.FC<CardDrawnModalProps> = ({
                   borderRadius: 20,
                   fontSize: 13,
                   fontWeight: 800,
-                  background: card.amount > 0 ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                  background:
+                    card.amount > 0 ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)',
                   color: card.amount > 0 ? '#10B981' : '#EF4444',
                   border: `1px solid ${card.amount > 0 ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
                 }}
               >
                 <Coins size={14} />
                 <span>
-                  {card.amount > 0 ? `+${card.amount.toLocaleString()}` : card.amount.toLocaleString()} so‘m
+                  {card.amount > 0
+                    ? `+${card.amount.toLocaleString()}`
+                    : card.amount.toLocaleString()}{' '}
+                  so‘m
                 </span>
               </div>
             ) : card.targetTileIndex !== undefined ? (

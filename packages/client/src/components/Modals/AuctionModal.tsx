@@ -93,7 +93,15 @@ export const AuctionModal: React.FC<AuctionModalProps> = ({
               <Gavel size={24} />
             </div>
             <div>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '1px', color: '#FDE68A', textTransform: 'uppercase' }}>
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 800,
+                  letterSpacing: '1px',
+                  color: '#FDE68A',
+                  textTransform: 'uppercase',
+                }}
+              >
                 {t.auctionModal.header}
               </div>
               <div style={{ fontSize: 18, fontWeight: 900, fontFamily: 'var(--font-heading)' }}>
@@ -136,7 +144,14 @@ export const AuctionModal: React.FC<AuctionModalProps> = ({
               gap: 6,
             }}
           >
-            <div style={{ fontSize: 12, color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 700 }}>
+            <div
+              style={{
+                fontSize: 12,
+                color: 'var(--text-muted)',
+                textTransform: 'uppercase',
+                fontWeight: 700,
+              }}
+            >
               {t.auctionModal.currentBid}
             </div>
             <div
@@ -148,7 +163,9 @@ export const AuctionModal: React.FC<AuctionModalProps> = ({
                 letterSpacing: '1px',
               }}
             >
-              {auction.highBid > 0 ? `${auction.highBid.toLocaleString()} so‘m` : t.auctionModal.noBids}
+              {auction.highBid > 0
+                ? `${auction.highBid.toLocaleString()} so‘m`
+                : t.auctionModal.noBids}
             </div>
 
             {highBidder ? (
@@ -182,7 +199,14 @@ export const AuctionModal: React.FC<AuctionModalProps> = ({
 
           {/* Active Participants List */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+            <div
+              style={{
+                fontSize: 12,
+                fontWeight: 700,
+                color: 'var(--text-muted)',
+                textTransform: 'uppercase',
+              }}
+            >
               {t.auctionModal.participants} ({auction.active.length})
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -202,7 +226,11 @@ export const AuctionModal: React.FC<AuctionModalProps> = ({
                         borderRadius: 16,
                         background: isActive ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.02)',
                         border: `1px solid ${
-                          isLeader ? 'var(--accent-gold)' : isActive ? 'var(--border-subtle)' : 'rgba(255,255,255,0.05)'
+                          isLeader
+                            ? 'var(--accent-gold)'
+                            : isActive
+                              ? 'var(--border-subtle)'
+                              : 'rgba(255,255,255,0.05)'
                         }`,
                         opacity: isActive ? 1 : 0.4,
                         fontSize: 12,
@@ -249,7 +277,13 @@ export const AuctionModal: React.FC<AuctionModalProps> = ({
                       disabled={!canAfford || isMeHighBidder}
                       onClick={() => handleBid(targetBid)}
                       id={`btn-bid-plus-${inc}`}
-                      title={!canAfford ? t.reasons.reasonInsufficientCash : isMeHighBidder ? t.reasons.reasonAlreadyHighBidder : `+${inc} so'm`}
+                      title={
+                        !canAfford
+                          ? t.reasons.reasonInsufficientCash
+                          : isMeHighBidder
+                            ? t.reasons.reasonAlreadyHighBidder
+                            : `+${inc} so'm`
+                      }
                     >
                       <Plus size={14} />
                       <span>+{inc} so‘m</span>
@@ -283,7 +317,10 @@ export const AuctionModal: React.FC<AuctionModalProps> = ({
                   className="btn btn-primary"
                   style={{
                     padding: '8px 16px',
-                    opacity: customBid <= auction.highBid || customBid > myCash || isMeHighBidder ? 0.5 : 1,
+                    opacity:
+                      customBid <= auction.highBid || customBid > myCash || isMeHighBidder
+                        ? 0.5
+                        : 1,
                   }}
                   disabled={customBid <= auction.highBid || customBid > myCash || isMeHighBidder}
                   onClick={() => handleBid(customBid)}

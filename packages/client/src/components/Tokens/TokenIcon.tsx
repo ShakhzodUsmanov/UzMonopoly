@@ -20,14 +20,16 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
     case 'doppi':
       // Traditional Uzbek Chust Doppi (Black skullcap with white almond motifs)
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 64 64"
-          className={className}
-          style={glowStyle}
-        >
-          <ellipse cx="32" cy="46" rx="26" ry="10" fill="#0F172A" stroke="#F8FAFC" strokeWidth="2.5" />
+        <svg width={size} height={size} viewBox="0 0 64 64" className={className} style={glowStyle}>
+          <ellipse
+            cx="32"
+            cy="46"
+            rx="26"
+            ry="10"
+            fill="#0F172A"
+            stroke="#F8FAFC"
+            strokeWidth="2.5"
+          />
           <path
             d="M8 44 C8 24, 20 12, 32 12 C44 12, 56 24, 56 44 Z"
             fill="#1E293B"
@@ -38,34 +40,72 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
           <path d="M22 36 Q18 26 26 24 Q24 32 22 36 Z" fill="#F8FAFC" />
           <path d="M42 36 Q46 26 38 24 Q40 32 42 36 Z" fill="#F8FAFC" />
           <path d="M32 30 Q30 20 34 18 Q34 26 32 30 Z" fill="#F8FAFC" />
-          <path d="M12 44 Q32 49 52 44" fill="none" stroke="#F8FAFC" strokeWidth="2" strokeDasharray="3 3" />
+          <path
+            d="M12 44 Q32 49 52 44"
+            fill="none"
+            stroke="#F8FAFC"
+            strokeWidth="2"
+            strokeDasharray="3 3"
+          />
         </svg>
       );
 
     case 'choynak':
       // Traditional Paxta (Cotton) blue/white teapot
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 64 64"
-          className={className}
-          style={glowStyle}
-        >
+        <svg width={size} height={size} viewBox="0 0 64 64" className={className} style={glowStyle}>
           <ellipse cx="32" cy="52" rx="16" ry="4" fill="#0F172A" opacity="0.4" />
           {/* Spout */}
-          <path d="M44 32 C54 26 56 16 58 14 C56 18 50 28 42 38 Z" fill="#0284C7" stroke="#FFF" strokeWidth="1.5" />
+          <path
+            d="M44 32 C54 26 56 16 58 14 C56 18 50 28 42 38 Z"
+            fill="#0284C7"
+            stroke="#FFF"
+            strokeWidth="1.5"
+          />
           {/* Handle */}
-          <path d="M18 24 C10 24 10 42 20 44" fill="none" stroke="#0284C7" strokeWidth="5" strokeLinecap="round" />
-          <path d="M18 24 C10 24 10 42 20 44" fill="none" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" />
+          <path
+            d="M18 24 C10 24 10 42 20 44"
+            fill="none"
+            stroke="#0284C7"
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M18 24 C10 24 10 42 20 44"
+            fill="none"
+            stroke="#F59E0B"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
           {/* Body */}
-          <ellipse cx="32" cy="36" rx="18" ry="14" fill="#0284C7" stroke="#F8FAFC" strokeWidth="2" />
+          <ellipse
+            cx="32"
+            cy="36"
+            rx="18"
+            ry="14"
+            fill="#0284C7"
+            stroke="#F8FAFC"
+            strokeWidth="2"
+          />
           {/* Paxta pattern */}
           <circle cx="32" cy="36" r="5" fill="#FFF" />
           <circle cx="32" cy="36" r="2.5" fill="#F59E0B" />
-          <path d="M32 27 L32 45 M23 36 L41 36" stroke="#FFF" strokeWidth="1.5" strokeLinecap="round" />
+          <path
+            d="M32 27 L32 45 M23 36 L41 36"
+            stroke="#FFF"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
           {/* Lid & Knob */}
-          <ellipse cx="32" cy="22" rx="10" ry="3.5" fill="#0369A1" stroke="#FFF" strokeWidth="1.5" />
+          <ellipse
+            cx="32"
+            cy="22"
+            rx="10"
+            ry="3.5"
+            fill="#0369A1"
+            stroke="#FFF"
+            strokeWidth="1.5"
+          />
           <circle cx="32" cy="18" r="3" fill="#F59E0B" stroke="#FFF" strokeWidth="1" />
         </svg>
       );
@@ -73,16 +113,24 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
     case 'qozon':
       // Uzbek Iron Cauldron / Kazan with steam
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 64 64"
-          className={className}
-          style={glowStyle}
-        >
+        <svg width={size} height={size} viewBox="0 0 64 64" className={className} style={glowStyle}>
           {/* Steam */}
-          <path d="M26 16 Q24 10 28 6" fill="none" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
-          <path d="M34 14 Q38 8 34 4" fill="none" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+          <path
+            d="M26 16 Q24 10 28 6"
+            fill="none"
+            stroke="#94A3B8"
+            strokeWidth="2"
+            strokeLinecap="round"
+            opacity="0.6"
+          />
+          <path
+            d="M34 14 Q38 8 34 4"
+            fill="none"
+            stroke="#94A3B8"
+            strokeWidth="2"
+            strokeLinecap="round"
+            opacity="0.6"
+          />
           {/* Cauldron base */}
           <path
             d="M12 28 C12 48, 52 48, 52 28 C52 24, 12 24, 12 28 Z"
@@ -95,42 +143,42 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
           {/* Inner plov gold */}
           <ellipse cx="32" cy="27" rx="16" ry="3.5" fill="#F59E0B" />
           {/* Handles */}
-          <path d="M8 27 C6 25 6 31 10 32" fill="none" stroke="#64748B" strokeWidth="3" strokeLinecap="round" />
-          <path d="M56 27 C58 25 58 31 54 32" fill="none" stroke="#64748B" strokeWidth="3" strokeLinecap="round" />
+          <path
+            d="M8 27 C6 25 6 31 10 32"
+            fill="none"
+            stroke="#64748B"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <path
+            d="M56 27 C58 25 58 31 54 32"
+            fill="none"
+            stroke="#64748B"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
           {/* Legs */}
-          <path d="M20 46 L16 54 M32 48 L32 56 M44 46 L48 54" stroke="#1E293B" strokeWidth="3" strokeLinecap="round" />
+          <path
+            d="M20 46 L16 54 M32 48 L32 56 M44 46 L48 54"
+            stroke="#1E293B"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
         </svg>
       );
 
     case 'tarvuz':
       // Juicy sliced Uzbek watermelon
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 64 64"
-          className={className}
-          style={glowStyle}
-        >
+        <svg width={size} height={size} viewBox="0 0 64 64" className={className} style={glowStyle}>
           {/* Shadow */}
           <ellipse cx="32" cy="54" rx="20" ry="4" fill="#0F172A" opacity="0.4" />
           {/* Rind */}
-          <path
-            d="M10 24 C10 46 54 46 54 24 Z"
-            fill="#15803D"
-            stroke="#166534"
-            strokeWidth="2"
-          />
+          <path d="M10 24 C10 46 54 46 54 24 Z" fill="#15803D" stroke="#166534" strokeWidth="2" />
           {/* White inner rim */}
-          <path
-            d="M13 25 C13 43 51 43 51 25 Z"
-            fill="#DCFCE7"
-          />
+          <path d="M13 25 C13 43 51 43 51 25 Z" fill="#DCFCE7" />
           {/* Red pulp */}
-          <path
-            d="M15 26 C15 41 49 41 49 26 Z"
-            fill="#EF4444"
-          />
+          <path d="M15 26 C15 41 49 41 49 26 Z" fill="#EF4444" />
           {/* Black seeds */}
           <circle cx="24" cy="32" r="1.5" fill="#0F172A" />
           <circle cx="32" cy="35" r="1.5" fill="#0F172A" />
@@ -143,13 +191,7 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
     case 'damas':
       // Iconic Damas microbus
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 64 64"
-          className={className}
-          style={glowStyle}
-        >
+        <svg width={size} height={size} viewBox="0 0 64 64" className={className} style={glowStyle}>
           {/* Shadow */}
           <ellipse cx="32" cy="52" rx="24" ry="4" fill="#0F172A" opacity="0.5" />
           {/* Damas Car Body */}
@@ -178,13 +220,7 @@ export const TokenIcon: React.FC<TokenIconProps> = ({
     case 'tulpar':
       // Winged horse / Pegasus in golden silhouette
       return (
-        <svg
-          width={size}
-          height={size}
-          viewBox="0 0 64 64"
-          className={className}
-          style={glowStyle}
-        >
+        <svg width={size} height={size} viewBox="0 0 64 64" className={className} style={glowStyle}>
           {/* Glow backdrop */}
           <circle cx="32" cy="32" r="24" fill="#F59E0B" opacity="0.15" />
           {/* Horse body & wings */}

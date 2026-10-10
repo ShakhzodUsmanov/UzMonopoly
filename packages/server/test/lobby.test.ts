@@ -53,7 +53,7 @@ describe('Colyseus Lobby and Room Management', () => {
     // Host creates room
     const hostRoom = await client1.create('game', { playerName: 'Host' });
     const hostInit = await new Promise<any>((res) => hostRoom.onMessage('init', res));
-    const roomCode = hostInit.roomCode;
+    expect(hostInit.roomCode).toBeDefined();
 
     // Player 2 joins
     const p2Room = await client2.joinById(hostRoom.roomId, { playerName: 'Player 2' });
@@ -62,9 +62,9 @@ describe('Colyseus Lobby and Room Management', () => {
     const p3Room = await client3.joinById(hostRoom.roomId, { playerName: 'Player 3' });
 
     // Wait for lobby updates
-    let latestLobby: any;
+    let _latestLobby: any;
     hostRoom.onMessage('lobby_update', (data) => {
-      latestLobby = data;
+      _latestLobby = data;
     });
 
     // P2 chooses token 'choynak'
@@ -78,7 +78,9 @@ describe('Colyseus Lobby and Room Management', () => {
       p3Room.onLeave((code) => resolve(code));
     });
 
-    const p3Id = await new Promise<any>((res) => p3Room.onMessage('init', res)).then((d) => d.playerId);
+    const p3Id = await new Promise<any>((res) => p3Room.onMessage('init', res)).then(
+      (d) => d.playerId,
+    );
     hostRoom.send('kickPlayer', { playerId: p3Id });
 
     const p3LeaveCode = await p3KickedPromise;

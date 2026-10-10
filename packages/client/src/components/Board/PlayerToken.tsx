@@ -9,12 +9,7 @@ interface PlayerTokenProps {
   isCurrent?: boolean;
 }
 
-export const PlayerToken: React.FC<PlayerTokenProps> = ({
-  player,
-  cx,
-  cy,
-  isCurrent = false,
-}) => {
+export const PlayerToken: React.FC<PlayerTokenProps> = ({ player, cx, cy, isCurrent = false }) => {
   return (
     <g
       id={`player-token-${player.id}`}
@@ -50,18 +45,19 @@ export const PlayerToken: React.FC<PlayerTokenProps> = ({
       <ellipse cx={0} cy={12} rx={14} ry={4} fill="#000" opacity={0.45} />
 
       {/* Player Color Base Ring */}
-      <circle
-        cx={0}
-        cy={0}
-        r={16}
-        fill="#0F172A"
-        stroke={player.color}
-        strokeWidth={3}
-      />
+      <circle cx={0} cy={0} r={16} fill="#0F172A" stroke={player.color} strokeWidth={3} />
 
       {/* Embedded Token Graphic */}
       <foreignObject x={-12} y={-12} width={24} height={24}>
-        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <TokenIcon token={player.token} size={20} glow={isCurrent} />
         </div>
       </foreignObject>

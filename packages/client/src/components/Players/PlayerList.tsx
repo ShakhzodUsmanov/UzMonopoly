@@ -10,11 +10,7 @@ interface PlayerListProps {
   t: Translations;
 }
 
-export const PlayerList: React.FC<PlayerListProps> = ({
-  gameState,
-  myPlayerId,
-  t,
-}) => {
+export const PlayerList: React.FC<PlayerListProps> = ({ gameState, myPlayerId, t }) => {
   const currentActingIdx = gameState.turnIndex;
 
   return (
@@ -42,7 +38,9 @@ export const PlayerList: React.FC<PlayerListProps> = ({
           borderBottom: '1px solid var(--border-subtle)',
         }}
       >
-        <span>{t.playersTab} ({gameState.players.length})</span>
+        <span>
+          {t.playersTab} ({gameState.players.length})
+        </span>
         <span>{t.cashLabel}</span>
       </div>
 
@@ -137,13 +135,24 @@ export const PlayerList: React.FC<PlayerListProps> = ({
                     </span>
                     {player.isHost && <Crown size={12} color="#F59E0B" />}
                     {isMe && (
-                      <span className="badge badge-blue" style={{ fontSize: 9, padding: '1px 5px' }}>
+                      <span
+                        className="badge badge-blue"
+                        style={{ fontSize: 9, padding: '1px 5px' }}
+                      >
                         {t.youBadge}
                       </span>
                     )}
                   </div>
 
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', display: 'flex', gap: 6, marginTop: 2 }}>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: 'var(--text-muted)',
+                      display: 'flex',
+                      gap: 6,
+                      marginTop: 2,
+                    }}
+                  >
                     <span>{ownedCount} mulk</span>
                     {player.inJail && (
                       <span style={{ color: '#EF4444', fontWeight: 600 }}>🔒 {t.inJail}</span>

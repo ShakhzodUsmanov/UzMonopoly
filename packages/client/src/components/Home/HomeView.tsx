@@ -3,7 +3,12 @@ import type { Translations, Locale } from '../../i18n.js';
 import { PlusCircle, LogIn, Bot, Globe, Shield, Users, Zap } from 'lucide-react';
 
 interface HomeViewProps {
-  onCreateRoom: (playerName: string, maxPlayers: number, isPrivate: boolean, mode: 'full' | 'short') => void;
+  onCreateRoom: (
+    playerName: string,
+    maxPlayers: number,
+    isPrivate: boolean,
+    mode: 'full' | 'short',
+  ) => void;
   onJoinRoom: (roomCode: string, playerName: string) => void;
   onStartSolo: (playerName: string) => void;
   locale: Locale;
@@ -88,7 +93,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
           textAlign: 'center',
           position: 'relative',
           overflow: 'hidden',
-          background: 'radial-gradient(circle at 50% 0%, rgba(0, 163, 196, 0.2), transparent 70%), rgba(15, 23, 42, 0.85)',
+          background:
+            'radial-gradient(circle at 50% 0%, rgba(0, 163, 196, 0.2), transparent 70%), rgba(15, 23, 42, 0.85)',
           border: '1px solid rgba(245, 158, 11, 0.25)',
         }}
       >
@@ -120,7 +126,16 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
         {/* Nickname Input */}
         <div style={{ maxWidth: 360, margin: '0 auto 24px' }}>
-          <label style={{ display: 'block', fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 6, textAlign: 'left' }}>
+          <label
+            style={{
+              display: 'block',
+              fontSize: 12,
+              fontWeight: 700,
+              color: 'var(--text-muted)',
+              marginBottom: 6,
+              textAlign: 'left',
+            }}
+          >
             {t.enterNickname}
           </label>
           <input
@@ -180,12 +195,25 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* Modal / Form Panel: Create Room */}
       {mode === 'create' && (
-        <form onSubmit={handleCreateSubmit} className="glass-panel animate-fade-in" style={{ padding: 24, maxWidth: 500, margin: '0 auto', width: '100%' }}>
-          <h3 className="heading-gold" style={{ fontSize: 20, marginBottom: 16 }}>{t.createRoom}</h3>
+        <form
+          onSubmit={handleCreateSubmit}
+          className="glass-panel animate-fade-in"
+          style={{ padding: 24, maxWidth: 500, margin: '0 auto', width: '100%' }}
+        >
+          <h3 className="heading-gold" style={{ fontSize: 20, marginBottom: 16 }}>
+            {t.createRoom}
+          </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 6 }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 12,
+                  color: 'var(--text-muted)',
+                  marginBottom: 6,
+                }}
+              >
                 {t.maxPlayers} (2 — 6)
               </label>
               <div style={{ display: 'flex', gap: 8 }}>
@@ -204,7 +232,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 6 }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 12,
+                  color: 'var(--text-muted)',
+                  marginBottom: 6,
+                }}
+              >
                 {t.mode}
               </label>
               <div style={{ display: 'flex', gap: 8 }}>
@@ -227,7 +262,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
               </div>
             </div>
 
-            <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', marginTop: 4 }}>
+            <label
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                cursor: 'pointer',
+                marginTop: 4,
+              }}
+            >
               <input
                 type="checkbox"
                 checked={isPrivate}
@@ -237,7 +280,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
               <span style={{ fontSize: 13 }}>{t.privateRoom}</span>
             </label>
 
-            <button type="submit" className="btn btn-gold" id="btn-submit-create-room" style={{ padding: 14, marginTop: 8 }}>
+            <button
+              type="submit"
+              className="btn btn-gold"
+              id="btn-submit-create-room"
+              style={{ padding: 14, marginTop: 8 }}
+            >
               {t.createRoom}
             </button>
           </div>
@@ -246,12 +294,25 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* Modal / Form Panel: Join Room */}
       {mode === 'join' && (
-        <form onSubmit={handleJoinSubmit} className="glass-panel animate-fade-in" style={{ padding: 24, maxWidth: 500, margin: '0 auto', width: '100%' }}>
-          <h3 className="heading-blue" style={{ fontSize: 20, marginBottom: 16 }}>{t.joinRoom}</h3>
+        <form
+          onSubmit={handleJoinSubmit}
+          className="glass-panel animate-fade-in"
+          style={{ padding: 24, maxWidth: 500, margin: '0 auto', width: '100%' }}
+        >
+          <h3 className="heading-blue" style={{ fontSize: 20, marginBottom: 16 }}>
+            {t.joinRoom}
+          </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ display: 'block', fontSize: 12, color: 'var(--text-muted)', marginBottom: 6 }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: 12,
+                  color: 'var(--text-muted)',
+                  marginBottom: 6,
+                }}
+              >
                 {t.enterRoomCode}
               </label>
               <input
@@ -277,7 +338,12 @@ export const HomeView: React.FC<HomeViewProps> = ({
               />
             </div>
 
-            <button type="submit" className="btn btn-primary" id="btn-submit-join-room" style={{ padding: 14, marginTop: 8 }}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              id="btn-submit-join-room"
+              style={{ padding: 14, marginTop: 8 }}
+            >
               {t.joinRoom}
             </button>
           </div>
@@ -285,12 +351,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
       )}
 
       {/* Highlights / Features Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: 16,
+        }}
+      >
         <div className="glass-panel" style={{ padding: 20 }}>
           <Zap size={22} color="#F59E0B" style={{ marginBottom: 10 }} />
-          <h4 style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>52 Katakli Katta Maydon</h4>
+          <h4 style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>
+            52 Katakli Katta Maydon
+          </h4>
           <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
-            Toshkent, Samarqand, Buxoro, Xiva va yirik milliy brendlar: Uzum, Korzinka, Safia, Damas.
+            Toshkent, Samarqand, Buxoro, Xiva va yirik milliy brendlar: Uzum, Korzinka, Safia,
+            Damas.
           </p>
         </div>
 

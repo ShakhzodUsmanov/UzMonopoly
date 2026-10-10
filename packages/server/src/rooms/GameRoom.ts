@@ -1,17 +1,7 @@
 import { Room, Client, matchMaker } from 'colyseus';
 import crypto from 'node:crypto';
-import type {
-  GameState,
-  Player,
-  TokenId,
-  RoomSettings,
-  ClientAction,
-} from '@uzmonopoly/shared';
-import {
-  TOKENS,
-  PLAYER_COLORS,
-  ClientActionSchema,
-} from '@uzmonopoly/shared';
+import type { GameState, Player, TokenId, RoomSettings, ClientAction } from '@uzmonopoly/shared';
+import { TOKENS, PLAYER_COLORS, ClientActionSchema } from '@uzmonopoly/shared';
 import {
   createInitialGameState,
   applyAction,
@@ -435,9 +425,7 @@ export class GameRoom extends Room {
 
     if (this.gameState.phase === 'AUCTION' && this.gameState.auction) {
       const activeIds = this.gameState.auction.active;
-      const botId = activeIds.find(
-        (id) => this.gameState?.players.find((p) => p.id === id)?.isBot,
-      );
+      const botId = activeIds.find((id) => this.gameState?.players.find((p) => p.id === id)?.isBot);
       if (botId) {
         actingPlayer = this.gameState.players.find((p) => p.id === botId);
       }

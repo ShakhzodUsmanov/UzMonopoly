@@ -15,9 +15,7 @@ interface BoardTileProps {
   orientation: 'bottom' | 'left' | 'top' | 'right' | 'corner';
 }
 
-const GROUP_COLORS = Object.fromEntries(
-  COLOR_GROUPS.map((g) => [g.id, g.color]),
-);
+const GROUP_COLORS = Object.fromEntries(COLOR_GROUPS.map((g) => [g.id, g.color]));
 
 export const BoardTile: React.FC<BoardTileProps> = ({
   tile,
@@ -76,12 +74,10 @@ export const BoardTile: React.FC<BoardTileProps> = ({
         {houses > 0 && houses < 5 && (
           <g>
             {Array.from({ length: houses }).map((_, i) => {
-              const hx = orientation === 'bottom' || orientation === 'top'
-                ? barX + 6 + i * 13
-                : barX + 4;
-              const hy = orientation === 'bottom' || orientation === 'top'
-                ? barY + 4
-                : barY + 6 + i * 13;
+              const hx =
+                orientation === 'bottom' || orientation === 'top' ? barX + 6 + i * 13 : barX + 4;
+              const hy =
+                orientation === 'bottom' || orientation === 'top' ? barY + 4 : barY + 6 + i * 13;
               return (
                 <rect
                   key={i}
@@ -122,9 +118,30 @@ export const BoardTile: React.FC<BoardTileProps> = ({
     if (tile.type === 'START') {
       return (
         <g>
-          <rect x={x + 10} y={y + 10} width={width - 20} height={height - 20} rx={12} fill="rgba(245,158,11,0.15)" />
-          <path d={`M ${cx - 24} ${cy} L ${cx + 14} ${cy} M ${cx + 6} ${cy - 12} L ${cx + 18} ${cy} L ${cx + 6} ${cy + 12}`} stroke="#F59E0B" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
-          <text x={cx} y={cy + 36} fill="#F59E0B" fontSize="13" fontWeight="800" textAnchor="middle" fontFamily="var(--font-heading)">
+          <rect
+            x={x + 10}
+            y={y + 10}
+            width={width - 20}
+            height={height - 20}
+            rx={12}
+            fill="rgba(245,158,11,0.15)"
+          />
+          <path
+            d={`M ${cx - 24} ${cy} L ${cx + 14} ${cy} M ${cx + 6} ${cy - 12} L ${cx + 18} ${cy} L ${cx + 6} ${cy + 12}`}
+            stroke="#F59E0B"
+            strokeWidth="4.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <text
+            x={cx}
+            y={cy + 36}
+            fill="#F59E0B"
+            fontSize="13"
+            fontWeight="800"
+            textAnchor="middle"
+            fontFamily="var(--font-heading)"
+          >
             BOSHLASH
           </text>
         </g>
@@ -134,13 +151,56 @@ export const BoardTile: React.FC<BoardTileProps> = ({
     if (tile.type === 'JAIL') {
       return (
         <g>
-          <rect x={x + 10} y={y + 10} width={width - 20} height={height - 20} rx={12} fill="rgba(239,68,68,0.12)" />
+          <rect
+            x={x + 10}
+            y={y + 10}
+            width={width - 20}
+            height={height - 20}
+            rx={12}
+            fill="rgba(239,68,68,0.12)"
+          />
           {/* Prison Bars */}
-          <line x1={cx - 18} y1={cy - 20} x2={cx - 18} y2={cy + 15} stroke="#94A3B8" strokeWidth="3" />
-          <line x1={cx - 6} y1={cy - 20} x2={cx - 6} y2={cy + 15} stroke="#94A3B8" strokeWidth="3" />
-          <line x1={cx + 6} y1={cy - 20} x2={cx + 6} y2={cy + 15} stroke="#94A3B8" strokeWidth="3" />
-          <line x1={cx + 18} y1={cy - 20} x2={cx + 18} y2={cy + 15} stroke="#94A3B8" strokeWidth="3" />
-          <text x={cx} y={cy + 36} fill="#EF4444" fontSize="12" fontWeight="800" textAnchor="middle" fontFamily="var(--font-heading)">
+          <line
+            x1={cx - 18}
+            y1={cy - 20}
+            x2={cx - 18}
+            y2={cy + 15}
+            stroke="#94A3B8"
+            strokeWidth="3"
+          />
+          <line
+            x1={cx - 6}
+            y1={cy - 20}
+            x2={cx - 6}
+            y2={cy + 15}
+            stroke="#94A3B8"
+            strokeWidth="3"
+          />
+          <line
+            x1={cx + 6}
+            y1={cy - 20}
+            x2={cx + 6}
+            y2={cy + 15}
+            stroke="#94A3B8"
+            strokeWidth="3"
+          />
+          <line
+            x1={cx + 18}
+            y1={cy - 20}
+            x2={cx + 18}
+            y2={cy + 15}
+            stroke="#94A3B8"
+            strokeWidth="3"
+          />
+          <text
+            x={cx}
+            y={cy + 36}
+            fill="#EF4444"
+            fontSize="12"
+            fontWeight="800"
+            textAnchor="middle"
+            fontFamily="var(--font-heading)"
+          >
             QAMOQXONA
           </text>
         </g>
@@ -150,10 +210,35 @@ export const BoardTile: React.FC<BoardTileProps> = ({
     if (tile.type === 'FREE_PARKING') {
       return (
         <g>
-          <rect x={x + 10} y={y + 10} width={width - 20} height={height - 20} rx={12} fill="rgba(16,185,129,0.12)" />
+          <rect
+            x={x + 10}
+            y={y + 10}
+            width={width - 20}
+            height={height - 20}
+            rx={12}
+            fill="rgba(16,185,129,0.12)"
+          />
           <circle cx={cx} cy={cy - 4} r={20} fill="#10B981" />
-          <text x={cx} y={cy + 4} fill="#FFF" fontSize="22" fontWeight="900" textAnchor="middle" fontFamily="var(--font-heading)">P</text>
-          <text x={cx} y={cy + 36} fill="#10B981" fontSize="11" fontWeight="800" textAnchor="middle" fontFamily="var(--font-heading)">
+          <text
+            x={cx}
+            y={cy + 4}
+            fill="#FFF"
+            fontSize="22"
+            fontWeight="900"
+            textAnchor="middle"
+            fontFamily="var(--font-heading)"
+          >
+            P
+          </text>
+          <text
+            x={cx}
+            y={cy + 36}
+            fill="#10B981"
+            fontSize="11"
+            fontWeight="800"
+            textAnchor="middle"
+            fontFamily="var(--font-heading)"
+          >
             BEPUL TO‘XTASH
           </text>
         </g>
@@ -163,10 +248,29 @@ export const BoardTile: React.FC<BoardTileProps> = ({
     if (tile.type === 'GO_TO_JAIL') {
       return (
         <g>
-          <rect x={x + 10} y={y + 10} width={width - 20} height={height - 20} rx={12} fill="rgba(239,68,68,0.15)" />
+          <rect
+            x={x + 10}
+            y={y + 10}
+            width={width - 20}
+            height={height - 20}
+            rx={12}
+            fill="rgba(239,68,68,0.15)"
+          />
           <circle cx={cx} cy={cy - 8} r={16} fill="#EF4444" />
-          <path d={`M ${cx - 8} ${cy - 8} L ${cx + 8} ${cy - 8} M ${cx} ${cy - 16} L ${cx} ${cy}`} stroke="#FFF" strokeWidth="2.5" />
-          <text x={cx} y={cy + 36} fill="#F87171" fontSize="12" fontWeight="800" textAnchor="middle" fontFamily="var(--font-heading)">
+          <path
+            d={`M ${cx - 8} ${cy - 8} L ${cx + 8} ${cy - 8} M ${cx} ${cy - 16} L ${cx} ${cy}`}
+            stroke="#FFF"
+            strokeWidth="2.5"
+          />
+          <text
+            x={cx}
+            y={cy + 36}
+            fill="#F87171"
+            fontSize="12"
+            fontWeight="800"
+            textAnchor="middle"
+            fontFamily="var(--font-heading)"
+          >
             QAMOQQA BOR!
           </text>
         </g>
@@ -177,7 +281,9 @@ export const BoardTile: React.FC<BoardTileProps> = ({
       return (
         <g>
           <circle cx={cx} cy={cy - 6} r={14} fill="rgba(245,158,11,0.2)" />
-          <text x={cx} y={cy + 1} fill="#F59E0B" fontSize="20" fontWeight="900" textAnchor="middle">?</text>
+          <text x={cx} y={cy + 1} fill="#F59E0B" fontSize="20" fontWeight="900" textAnchor="middle">
+            ?
+          </text>
         </g>
       );
     }
@@ -185,7 +291,16 @@ export const BoardTile: React.FC<BoardTileProps> = ({
     if (tile.type === 'COMMUNITY_CHEST') {
       return (
         <g>
-          <rect x={cx - 14} y={cy - 14} width={28} height={18} rx={3} fill="#0284C7" stroke="#38BDF8" strokeWidth="1.5" />
+          <rect
+            x={cx - 14}
+            y={cy - 14}
+            width={28}
+            height={18}
+            rx={3}
+            fill="#0284C7"
+            stroke="#38BDF8"
+            strokeWidth="1.5"
+          />
           <circle cx={cx} cy={cy - 5} r={2.5} fill="#F59E0B" />
         </g>
       );
@@ -195,7 +310,9 @@ export const BoardTile: React.FC<BoardTileProps> = ({
       return (
         <g>
           <circle cx={cx} cy={cy - 8} r={13} fill="rgba(239,68,68,0.2)" />
-          <text x={cx} y={cy - 2} fill="#EF4444" fontSize="14" fontWeight="800" textAnchor="middle">%</text>
+          <text x={cx} y={cy - 2} fill="#EF4444" fontSize="14" fontWeight="800" textAnchor="middle">
+            %
+          </text>
         </g>
       );
     }
@@ -204,7 +321,9 @@ export const BoardTile: React.FC<BoardTileProps> = ({
       return (
         <g>
           <circle cx={cx} cy={cy - 8} r={13} fill="rgba(56,189,248,0.15)" />
-          <text x={cx} y={cy - 2} fill="#38BDF8" fontSize="13" fontWeight="800" textAnchor="middle">✈</text>
+          <text x={cx} y={cy - 2} fill="#38BDF8" fontSize="13" fontWeight="800" textAnchor="middle">
+            ✈
+          </text>
         </g>
       );
     }

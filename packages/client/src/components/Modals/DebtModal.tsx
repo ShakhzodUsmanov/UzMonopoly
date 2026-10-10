@@ -1,6 +1,10 @@
 import React from 'react';
 import type { GameState, ClientAction } from '@uzmonopoly/shared';
-import { BOARD_TILES, calculateMortgageValue, calculateBuildingSellValue } from '@uzmonopoly/engine';
+import {
+  BOARD_TILES,
+  calculateMortgageValue,
+  calculateBuildingSellValue,
+} from '@uzmonopoly/engine';
 import type { Translations, Locale } from '../../i18n.js';
 import { audioService } from '../../services/audio.js';
 import { AlertOctagon, CheckCircle2, Skull } from 'lucide-react';
@@ -64,7 +68,11 @@ export const DebtModal: React.FC<DebtModalProps> = ({
   };
 
   return (
-    <div className="modal-overlay" id="modal-debt" style={{ backdropFilter: 'blur(8px)', zIndex: 1000 }}>
+    <div
+      className="modal-overlay"
+      id="modal-debt"
+      style={{ backdropFilter: 'blur(8px)', zIndex: 1000 }}
+    >
       <div
         className="modal-content animate-fade-in"
         style={{
@@ -102,7 +110,15 @@ export const DebtModal: React.FC<DebtModalProps> = ({
             <AlertOctagon size={26} color="#FDE047" />
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#FDE047' }}>
+            <div
+              style={{
+                fontSize: 11,
+                fontWeight: 800,
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                color: '#FDE047',
+              }}
+            >
               {t.debtModal.header}
             </div>
             <div style={{ fontSize: 20, fontWeight: 900, fontFamily: 'var(--font-heading)' }}>
@@ -126,13 +142,27 @@ export const DebtModal: React.FC<DebtModalProps> = ({
               fontSize: 13,
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'var(--text-muted)',
+              }}
+            >
               <span>{t.debtModal.creditor}:</span>
               <span style={{ color: '#F8FAFC', fontWeight: 700 }}>{creditorName}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'var(--text-muted)',
+              }}
+            >
               <span>{t.currentBalance}:</span>
-              <span style={{ color: '#F8FAFC', fontWeight: 700 }}>{myCash.toLocaleString()} so‘m</span>
+              <span style={{ color: '#F8FAFC', fontWeight: 700 }}>
+                {myCash.toLocaleString()} so‘m
+              </span>
             </div>
             <div
               style={{
@@ -219,7 +249,15 @@ export const DebtModal: React.FC<DebtModalProps> = ({
                   <div style={{ fontSize: 11, fontWeight: 700, color: '#10B981' }}>
                     {t.debtModal.mortgageProperties}:
                   </div>
-                  <div style={{ maxHeight: 120, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  <div
+                    style={{
+                      maxHeight: 120,
+                      overflowY: 'auto',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 4,
+                    }}
+                  >
                     {mortgageableTiles.map((tDef) => {
                       const mortgageVal = calculateMortgageValue(tDef.price ?? 0);
                       return (

@@ -77,7 +77,9 @@ describe('6-Player Full Multiplayer Match with Reconnection', () => {
         color: playerConfigs[i]!.color,
       });
       room.send('ready', {});
-      console.log(`[LOBBY] Player ${i + 1} (${playerConfigs[i]!.name}) joined and readied with token ${playerConfigs[i]!.token}`);
+      console.log(
+        `[LOBBY] Player ${i + 1} (${playerConfigs[i]!.name}) joined and readied with token ${playerConfigs[i]!.token}`,
+      );
     }
 
     await new Promise((r) => setTimeout(r, 150));
@@ -228,7 +230,9 @@ describe('6-Player Full Multiplayer Match with Reconnection', () => {
     await p6Room.leave();
     await botPromise;
     expect(currentGameState.players[5].isBot).toBe(true);
-    console.log(`[BOT] Player 6 is now successfully marked as BOT on server and continues playing!`);
+    console.log(
+      `[BOT] Player 6 is now successfully marked as BOT on server and continues playing!`,
+    );
 
     // Verify chat
     console.log(`\n[CHAT] Testing chat broadcast from Host...`);

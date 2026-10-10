@@ -38,7 +38,7 @@ export const EventLogAndChat: React.FC<EventLogAndChatProps> = ({
     setInputText('');
   };
 
-  const quickReplies = ["Salom!", "Omad!", "Zo‘r o‘yin!", "Dubl bo‘ldi! 🎲", "Auksionga qo‘y!"];
+  const quickReplies = ['Salom!', 'Omad!', 'Zo‘r o‘yin!', 'Dubl bo‘ldi! 🎲', 'Auksionga qo‘y!'];
 
   return (
     <div
@@ -190,7 +190,9 @@ export const EventLogAndChat: React.FC<EventLogAndChatProps> = ({
                     background: 'rgba(255, 255, 255, 0.04)',
                   }}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
+                  <div
+                    style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}
+                  >
                     <strong style={{ color: msg.color, fontSize: 12 }}>{msg.sender}</strong>
                     <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>{msg.time}</span>
                   </div>
@@ -259,11 +261,7 @@ export const EventLogAndChat: React.FC<EventLogAndChatProps> = ({
                 outline: 'none',
               }}
             />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{ padding: '8px 12px' }}
-            >
+            <button type="submit" className="btn btn-primary" style={{ padding: '8px 12px' }}>
               <Send size={15} />
             </button>
           </form>

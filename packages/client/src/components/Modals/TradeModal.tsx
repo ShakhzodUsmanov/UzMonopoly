@@ -34,9 +34,7 @@ export const TradeModal: React.FC<TradeModalProps> = ({
   const isOutgoingTrade = pendingTrade && pendingTrade.initiatorId === myPlayerId;
 
   // New trade proposal form state
-  const [selectedTargetId, setSelectedTargetId] = useState<string>(
-    otherPlayers[0]?.id || '',
-  );
+  const [selectedTargetId, setSelectedTargetId] = useState<string>(otherPlayers[0]?.id || '');
   const [myMoney, setMyMoney] = useState<number>(0);
   const [targetMoney, setTargetMoney] = useState<number>(0);
   const [selectedMyTiles, setSelectedMyTiles] = useState<number[]>([]);
@@ -115,7 +113,8 @@ export const TradeModal: React.FC<TradeModalProps> = ({
         {/* Header */}
         <div
           style={{
-            background: 'linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
+            background:
+              'linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
             padding: '18px 24px',
             color: '#FFF',
             display: 'flex',
@@ -226,7 +225,12 @@ export const TradeModal: React.FC<TradeModalProps> = ({
                 </button>
                 <button
                   className="btn btn-outline"
-                  style={{ flex: 1, padding: '12px', color: '#EF4444', borderColor: 'rgba(239,68,68,0.3)' }}
+                  style={{
+                    flex: 1,
+                    padding: '12px',
+                    color: '#EF4444',
+                    borderColor: 'rgba(239,68,68,0.3)',
+                  }}
                   onClick={() => handleAnswerTrade(false)}
                   id="btn-reject-trade"
                 >
@@ -249,9 +253,7 @@ export const TradeModal: React.FC<TradeModalProps> = ({
                 gap: 12,
               }}
             >
-              <div style={{ fontSize: 16, fontWeight: 700 }}>
-                ⏳ {t.tradeModal.waitingResponse}
-              </div>
+              <div style={{ fontSize: 16, fontWeight: 700 }}>⏳ {t.tradeModal.waitingResponse}</div>
               <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
                 {gameState.players.find((p) => p.id === pendingTrade.targetId)?.name}{' '}
                 {t.tradeModal.reviewingNotice}
@@ -318,7 +320,14 @@ export const TradeModal: React.FC<TradeModalProps> = ({
 
                   {/* Money Input */}
                   <div>
-                    <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
+                    <label
+                      style={{
+                        fontSize: 11,
+                        color: 'var(--text-muted)',
+                        display: 'block',
+                        marginBottom: 4,
+                      }}
+                    >
                       {t.tradeModal.money} (max: {myPlayer?.cash ?? 0})
                     </label>
                     <input
@@ -326,7 +335,11 @@ export const TradeModal: React.FC<TradeModalProps> = ({
                       min={0}
                       max={myPlayer?.cash ?? 0}
                       value={myMoney}
-                      onChange={(e) => setMyMoney(Math.min(myPlayer?.cash ?? 0, Math.max(0, Number(e.target.value))))}
+                      onChange={(e) =>
+                        setMyMoney(
+                          Math.min(myPlayer?.cash ?? 0, Math.max(0, Number(e.target.value))),
+                        )
+                      }
                       style={{
                         width: '100%',
                         background: 'rgba(255,255,255,0.06)',
@@ -343,15 +356,27 @@ export const TradeModal: React.FC<TradeModalProps> = ({
                   <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
                     {t.tradeModal.properties}:
                   </div>
-                  <div style={{ maxHeight: 160, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  <div
+                    style={{
+                      maxHeight: 160,
+                      overflowY: 'auto',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 4,
+                    }}
+                  >
                     {myProperties.length === 0 ? (
-                      <div style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                      <div
+                        style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}
+                      >
                         {t.tradeModal.noProperties}
                       </div>
                     ) : (
                       myProperties.map((tile) => {
                         const checked = selectedMyTiles.includes(tile.index);
-                        const groupCol = tile.group ? GROUP_COLORS[tile.group] || '#475569' : '#0284C7';
+                        const groupCol = tile.group
+                          ? GROUP_COLORS[tile.group] || '#475569'
+                          : '#0284C7';
                         return (
                           <label
                             key={tile.index}
@@ -405,7 +430,14 @@ export const TradeModal: React.FC<TradeModalProps> = ({
 
                   {/* Money Input */}
                   <div>
-                    <label style={{ fontSize: 11, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
+                    <label
+                      style={{
+                        fontSize: 11,
+                        color: 'var(--text-muted)',
+                        display: 'block',
+                        marginBottom: 4,
+                      }}
+                    >
                       {t.tradeModal.money} (max: {targetPlayer?.cash ?? 0})
                     </label>
                     <input
@@ -413,7 +445,11 @@ export const TradeModal: React.FC<TradeModalProps> = ({
                       min={0}
                       max={targetPlayer?.cash ?? 0}
                       value={targetMoney}
-                      onChange={(e) => setTargetMoney(Math.min(targetPlayer?.cash ?? 0, Math.max(0, Number(e.target.value))))}
+                      onChange={(e) =>
+                        setTargetMoney(
+                          Math.min(targetPlayer?.cash ?? 0, Math.max(0, Number(e.target.value))),
+                        )
+                      }
                       style={{
                         width: '100%',
                         background: 'rgba(255,255,255,0.06)',
@@ -430,15 +466,27 @@ export const TradeModal: React.FC<TradeModalProps> = ({
                   <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>
                     {t.tradeModal.properties}:
                   </div>
-                  <div style={{ maxHeight: 160, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  <div
+                    style={{
+                      maxHeight: 160,
+                      overflowY: 'auto',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 4,
+                    }}
+                  >
                     {targetProperties.length === 0 ? (
-                      <div style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                      <div
+                        style={{ fontSize: 12, color: 'var(--text-muted)', fontStyle: 'italic' }}
+                      >
                         {t.tradeModal.noProperties}
                       </div>
                     ) : (
                       targetProperties.map((tile) => {
                         const checked = selectedTargetTiles.includes(tile.index);
-                        const groupCol = tile.group ? GROUP_COLORS[tile.group] || '#475569' : '#0284C7';
+                        const groupCol = tile.group
+                          ? GROUP_COLORS[tile.group] || '#475569'
+                          : '#0284C7';
                         return (
                           <label
                             key={tile.index}
@@ -482,9 +530,20 @@ export const TradeModal: React.FC<TradeModalProps> = ({
                   width: '100%',
                   padding: '12px',
                   fontSize: 14,
-                  opacity: selectedMyTiles.length === 0 && myMoney === 0 && selectedTargetTiles.length === 0 && targetMoney === 0 ? 0.5 : 1,
+                  opacity:
+                    selectedMyTiles.length === 0 &&
+                    myMoney === 0 &&
+                    selectedTargetTiles.length === 0 &&
+                    targetMoney === 0
+                      ? 0.5
+                      : 1,
                 }}
-                disabled={selectedMyTiles.length === 0 && myMoney === 0 && selectedTargetTiles.length === 0 && targetMoney === 0}
+                disabled={
+                  selectedMyTiles.length === 0 &&
+                  myMoney === 0 &&
+                  selectedTargetTiles.length === 0 &&
+                  targetMoney === 0
+                }
                 onClick={handleProposeTrade}
                 id="btn-propose-trade"
               >

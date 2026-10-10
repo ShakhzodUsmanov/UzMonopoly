@@ -75,7 +75,15 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
         }}
       >
         <div>
-          <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '1px', textTransform: 'uppercase' }}>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              color: 'var(--text-muted)',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+            }}
+          >
             {t.lobbyTitle}
           </div>
           <h2 className="heading-gold" style={{ fontSize: 28, marginTop: 4 }}>
@@ -87,11 +95,7 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
         </div>
 
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <button
-            className="btn btn-outline"
-            onClick={handleCopyCode}
-            id="btn-copy-room-code"
-          >
+          <button className="btn btn-outline" onClick={handleCopyCode} id="btn-copy-room-code">
             {copied ? <Check size={16} color="#10B981" /> : <Copy size={16} />}
             <span>{copied ? t.codeCopied : t.copyCode}</span>
           </button>
@@ -109,14 +113,31 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
 
       {/* Players List Grid */}
       <div className="glass-panel" style={{ padding: 20 }}>
-        <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>{t.playersTab} ({lobby.players.length}/{lobby.maxPlayers})</span>
+        <h3
+          style={{
+            fontSize: 16,
+            fontWeight: 700,
+            marginBottom: 16,
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <span>
+            {t.playersTab} ({lobby.players.length}/{lobby.maxPlayers})
+          </span>
           <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-muted)' }}>
             {t.waitingPlayers}
           </span>
         </h3>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: 12,
+          }}
+        >
           {lobby.players.map((player) => {
             const isMe = player.id === myPlayer?.id;
 
@@ -198,7 +219,13 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
         {isHost && onAddBot && lobby.players.length < lobby.maxPlayers && (
           <button
             className="btn btn-outline"
-            style={{ marginTop: 14, display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 13 }}
+            style={{
+              marginTop: 14,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              fontSize: 13,
+            }}
             onClick={onAddBot}
             id="btn-add-ai-bot"
           >
@@ -211,11 +238,16 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
       {/* Customization: Token & Color Picker for Me */}
       {myPlayer && (
         <div className="glass-panel" style={{ padding: 20 }}>
-          <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 12 }}>
-            {t.chooseToken}
-          </h3>
+          <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 12 }}>{t.chooseToken}</h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: 10, marginBottom: 18 }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
+              gap: 10,
+              marginBottom: 18,
+            }}
+          >
             {TOKENS.map((tokenDef) => {
               const isSelected = myPlayer.token === tokenDef.id;
               const isTaken = takenTokens.has(tokenDef.id);
@@ -231,9 +263,7 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
                     background: isSelected
                       ? 'rgba(245, 158, 11, 0.15)'
                       : 'rgba(255, 255, 255, 0.03)',
-                    border: isSelected
-                      ? '2px solid #F59E0B'
-                      : '1px solid var(--border-subtle)',
+                    border: isSelected ? '2px solid #F59E0B' : '1px solid var(--border-subtle)',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -243,7 +273,13 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
                   }}
                 >
                   <TokenIcon token={tokenDef.id} size={32} glow={isSelected} />
-                  <span style={{ fontSize: 11, fontWeight: 600, color: isSelected ? '#F59E0B' : 'var(--text-main)' }}>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 600,
+                      color: isSelected ? '#F59E0B' : 'var(--text-main)',
+                    }}
+                  >
                     {t.tokens[tokenDef.id]}
                   </span>
                 </button>
@@ -251,9 +287,7 @@ export const RoomLobbyView: React.FC<RoomLobbyViewProps> = ({
             })}
           </div>
 
-          <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 12 }}>
-            {t.chooseColor}
-          </h3>
+          <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 12 }}>{t.chooseColor}</h3>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             {PLAYER_COLORS.map((colorHex) => {

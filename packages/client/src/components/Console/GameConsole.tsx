@@ -23,8 +23,8 @@ export const GameConsole: React.FC<GameConsoleProps> = ({
   const isMyTurn = myPlayerId ? currentActingPlayer?.id === myPlayerId : true;
   const currentTile = currentActingPlayer ? BOARD_TILES[currentActingPlayer.position] : undefined;
   const lastDice: [number, number] = [
-    (gameState.doublesCount > 0 ? 3 : 4),
-    (gameState.doublesCount > 0 ? 3 : 2),
+    gameState.doublesCount > 0 ? 3 : 4,
+    gameState.doublesCount > 0 ? 3 : 2,
   ];
 
   return (
@@ -64,7 +64,14 @@ export const GameConsole: React.FC<GameConsoleProps> = ({
             }}
           />
           <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+            <div
+              style={{
+                fontSize: 11,
+                fontWeight: 700,
+                color: 'var(--text-muted)',
+                textTransform: 'uppercase',
+              }}
+            >
               {isMyTurn ? t.yourTurn : t.waitingTurn}
             </div>
             <div style={{ fontSize: 16, fontWeight: 800, fontFamily: 'var(--font-heading)' }}>
@@ -104,14 +111,18 @@ export const GameConsole: React.FC<GameConsoleProps> = ({
       {gameState.phase === 'BUY_DECISION' && currentTile && (
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ fontSize: 13, textAlign: 'center', color: 'var(--text-muted)' }}>
-            <strong style={{ color: '#F8FAFC' }}>{currentTile.name}</strong> ({currentTile.price} so‘m) sotib olasizmi?
+            <strong style={{ color: '#F8FAFC' }}>{currentTile.name}</strong> ({currentTile.price}{' '}
+            so‘m) sotib olasizmi?
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             <button
               className="btn btn-gold"
               style={{ flex: 1 }}
               onClick={() => onAction({ type: 'buy' })}
-              disabled={!isMyTurn || (currentActingPlayer && currentActingPlayer.cash < (currentTile.price ?? 0))}
+              disabled={
+                !isMyTurn ||
+                (currentActingPlayer && currentActingPlayer.cash < (currentTile.price ?? 0))
+              }
               id="btn-buy-property"
             >
               💳 {t.buyProperty}

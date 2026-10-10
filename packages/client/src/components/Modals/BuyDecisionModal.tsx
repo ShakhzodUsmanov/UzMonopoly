@@ -33,8 +33,7 @@ export const BuyDecisionModal: React.FC<BuyDecisionModalProps> = ({
   const cashAfter = myCash - price;
   const groupColor = tile.group ? GROUP_COLORS[tile.group] || '#3B82F6' : '#10B981';
 
-  const tileName =
-    tile.nameI18n?.[locale] || tile.name;
+  const tileName = tile.nameI18n?.[locale] || tile.name;
 
   const handleBuy = () => {
     audioService.playCoin();
@@ -127,19 +126,37 @@ export const BuyDecisionModal: React.FC<BuyDecisionModalProps> = ({
               fontSize: 13,
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'var(--text-muted)',
+              }}
+            >
               <span>{t.propertyCard.baseRent}:</span>
               <span style={{ color: '#F8FAFC', fontWeight: 700 }}>
                 {calculateRent(tile.baseRent ?? 0, 0, false, false).toLocaleString()} so‘m
               </span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'var(--text-muted)',
+              }}
+            >
               <span>{t.propertyCard.fullGroupRent}:</span>
               <span style={{ color: '#10B981', fontWeight: 700 }}>
                 {calculateRent(tile.baseRent ?? 0, 0, true, false).toLocaleString()} so‘m
               </span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: 'var(--text-muted)',
+              }}
+            >
               <span>{t.propertyCard.mortgageValue}:</span>
               <span style={{ color: '#F59E0B', fontWeight: 700 }}>
                 {Math.floor(price / 2).toLocaleString()} so‘m
@@ -162,12 +179,18 @@ export const BuyDecisionModal: React.FC<BuyDecisionModalProps> = ({
               }}
             >
               <div>
-                <div style={{ color: 'var(--text-muted)', fontSize: 11, fontWeight: 600 }}>{t.currentBalance}</div>
-                <div style={{ fontWeight: 800, color: '#F8FAFC' }}>{myCash.toLocaleString()} so‘m</div>
+                <div style={{ color: 'var(--text-muted)', fontSize: 11, fontWeight: 600 }}>
+                  {t.currentBalance}
+                </div>
+                <div style={{ fontWeight: 800, color: '#F8FAFC' }}>
+                  {myCash.toLocaleString()} so‘m
+                </div>
               </div>
               <ArrowRight size={16} color="var(--text-muted)" />
               <div>
-                <div style={{ color: 'var(--text-muted)', fontSize: 11, fontWeight: 600 }}>{t.balanceAfter}</div>
+                <div style={{ color: 'var(--text-muted)', fontSize: 11, fontWeight: 600 }}>
+                  {t.balanceAfter}
+                </div>
                 <div
                   style={{
                     fontWeight: 800,

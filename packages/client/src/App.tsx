@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import type { GameState, TileDefinition, GameEvent, TokenId, CardDefinition } from '@uzmonopoly/shared';
+import type {
+  GameState,
+  TileDefinition,
+  GameEvent,
+  TokenId,
+  CardDefinition,
+} from '@uzmonopoly/shared';
 import { BOARD_TILES, IMKON_CARDS, XAZINA_CARDS } from '@uzmonopoly/engine';
 import { DICTIONARY, type Locale } from './i18n.js';
 import { networkService, type LobbyInfo } from './services/network.js';
@@ -329,7 +335,10 @@ export const App: React.FC = () => {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <span className="heading-gold" style={{ fontSize: 20, fontWeight: 900, letterSpacing: '1px' }}>
+              <span
+                className="heading-gold"
+                style={{ fontSize: 20, fontWeight: 900, letterSpacing: '1px' }}
+              >
                 UZMONOPOLY
               </span>
               <span className="badge badge-gold" style={{ fontSize: 10 }}>
@@ -337,7 +346,9 @@ export const App: React.FC = () => {
               </span>
               {gameState.settings?.mode === 'short' && (
                 <span className="badge badge-emerald" style={{ fontSize: 10 }}>
-                  ⚡ {t.modeShort} ({Math.max(0, ((gameState.settings.shortGameMinutes ?? 30) * 4) - gameState.seq)} yurish)
+                  ⚡ {t.modeShort} (
+                  {Math.max(0, (gameState.settings.shortGameMinutes ?? 30) * 4 - gameState.seq)}{' '}
+                  yurish)
                 </span>
               )}
             </div>
@@ -361,7 +372,11 @@ export const App: React.FC = () => {
                 onClick={handleToggleSound}
                 title={soundEnabled ? 'Ovozni o‘chirish' : 'Ovozni yoqish'}
               >
-                {soundEnabled ? <Volume2 size={15} color="#10B981" /> : <VolumeX size={15} color="#94A3B8" />}
+                {soundEnabled ? (
+                  <Volume2 size={15} color="#10B981" />
+                ) : (
+                  <VolumeX size={15} color="#94A3B8" />
+                )}
               </button>
 
               {/* Language Selector */}
@@ -379,9 +394,15 @@ export const App: React.FC = () => {
                   cursor: 'pointer',
                 }}
               >
-                <option value="uz" style={{ background: '#0F172A' }}>O‘zbekcha</option>
-                <option value="ru" style={{ background: '#0F172A' }}>Русский</option>
-                <option value="en" style={{ background: '#0F172A' }}>English</option>
+                <option value="uz" style={{ background: '#0F172A' }}>
+                  O‘zbekcha
+                </option>
+                <option value="ru" style={{ background: '#0F172A' }}>
+                  Русский
+                </option>
+                <option value="en" style={{ background: '#0F172A' }}>
+                  English
+                </option>
               </select>
 
               {/* Leave Room Button */}
@@ -569,10 +590,16 @@ export const App: React.FC = () => {
           marginTop: 'auto',
         }}
       >
-        <div style={{ maxWidth: 840, lineHeight: 1.4, opacity: 0.85 }}>
-          ⚖️ {t.footerDisclaimer}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ maxWidth: 840, lineHeight: 1.4, opacity: 0.85 }}>⚖️ {t.footerDisclaimer}</div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
           <span style={{ color: 'var(--text-dim)', fontSize: 11 }}>
             ⌨️ {t.keyboardShortcutsGuide}
           </span>

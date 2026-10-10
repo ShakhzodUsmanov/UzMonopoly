@@ -155,10 +155,25 @@ export const PropertyManagementModal: React.FC<PropertyManagementModalProps> = (
             <X size={16} />
           </button>
 
-          <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', opacity: 0.9 }}>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 800,
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              opacity: 0.9,
+            }}
+          >
             {t.propertyModal.header}
           </div>
-          <h2 style={{ fontSize: 22, fontWeight: 900, fontFamily: 'var(--font-heading)', marginTop: 2 }}>
+          <h2
+            style={{
+              fontSize: 22,
+              fontWeight: 900,
+              fontFamily: 'var(--font-heading)',
+              marginTop: 2,
+            }}
+          >
             {tile.nameI18n?.[locale] || tile.name}
           </h2>
 
@@ -181,8 +196,8 @@ export const PropertyManagementModal: React.FC<PropertyManagementModalProps> = (
                 {tileState.houses === 5
                   ? `🏨 ${t.propertyCard.hotel}`
                   : tileState.houses > 0
-                  ? `🏠 ${tileState.houses} ${t.propertyCard.house}`
-                  : t.propertyModal.noBuildings}
+                    ? `🏠 ${tileState.houses} ${t.propertyCard.house}`
+                    : t.propertyModal.noBuildings}
               </span>
             </div>
 
@@ -232,7 +247,14 @@ export const PropertyManagementModal: React.FC<PropertyManagementModalProps> = (
                   <span>{t.propertyModal.buildBranch}</span>
                 </button>
                 {buildDisabledReason && (
-                  <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4, lineHeight: 1.2 }}>
+                  <div
+                    style={{
+                      fontSize: 10,
+                      color: 'var(--text-muted)',
+                      marginTop: 4,
+                      lineHeight: 1.2,
+                    }}
+                  >
                     ⚠️ {buildDisabledReason}
                   </div>
                 )}
@@ -257,7 +279,14 @@ export const PropertyManagementModal: React.FC<PropertyManagementModalProps> = (
                   <span>+{sellBuildingVal} so‘m</span>
                 </button>
                 {sellDisabledReason && (
-                  <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4, lineHeight: 1.2 }}>
+                  <div
+                    style={{
+                      fontSize: 10,
+                      color: 'var(--text-muted)',
+                      marginTop: 4,
+                      lineHeight: 1.2,
+                    }}
+                  >
                     ⚠️ {sellDisabledReason}
                   </div>
                 )}
@@ -299,10 +328,19 @@ export const PropertyManagementModal: React.FC<PropertyManagementModalProps> = (
                   onClick={handleMortgage}
                   id="btn-mortgage-property"
                 >
-                  <span>{t.propertyModal.mortgage} (+{mortgageVal})</span>
+                  <span>
+                    {t.propertyModal.mortgage} (+{mortgageVal})
+                  </span>
                 </button>
                 {mortgageDisabledReason && (
-                  <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4, lineHeight: 1.2 }}>
+                  <div
+                    style={{
+                      fontSize: 10,
+                      color: 'var(--text-muted)',
+                      marginTop: 4,
+                      lineHeight: 1.2,
+                    }}
+                  >
                     ⚠️ {mortgageDisabledReason}
                   </div>
                 )}
@@ -323,10 +361,19 @@ export const PropertyManagementModal: React.FC<PropertyManagementModalProps> = (
                   onClick={handleUnmortgage}
                   id="btn-unmortgage-property"
                 >
-                  <span>{t.propertyModal.unmortgage} (-{unmortgageCost})</span>
+                  <span>
+                    {t.propertyModal.unmortgage} (-{unmortgageCost})
+                  </span>
                 </button>
                 {unmortgageDisabledReason && (
-                  <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4, lineHeight: 1.2 }}>
+                  <div
+                    style={{
+                      fontSize: 10,
+                      color: 'var(--text-muted)',
+                      marginTop: 4,
+                      lineHeight: 1.2,
+                    }}
+                  >
                     ⚠️ {unmortgageDisabledReason}
                   </div>
                 )}

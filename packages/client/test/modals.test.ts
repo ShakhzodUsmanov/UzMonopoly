@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { DICTIONARY, type Locale } from '../src/i18n.js';
-import { IMKON_CARDS, XAZINA_CARDS, BOARD_TILES, createInitialGameState, createPRNG } from '@uzmonopoly/engine';
+import { IMKON_CARDS, XAZINA_CARDS, createInitialGameState, createPRNG } from '@uzmonopoly/engine';
 import { audioService } from '../src/services/audio.js';
 
 describe('Phase 5: Client Game Actions & Modals', () => {

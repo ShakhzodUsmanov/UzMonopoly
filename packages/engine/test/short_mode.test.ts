@@ -4,7 +4,6 @@ import {
   createPRNG,
   checkGameOver,
   calculateNetWorth,
-  applyAction,
 } from '../src/index.js';
 
 describe('Phase 6: Short Game Mode Engine Logic', () => {
