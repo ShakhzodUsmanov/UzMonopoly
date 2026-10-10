@@ -1,0 +1,17 @@
+{
+  "name": "@uzmonopoly/client",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@uzmonopoly/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}

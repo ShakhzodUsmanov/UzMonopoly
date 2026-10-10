@@ -1,0 +1,21 @@
+{$DOMAIN:uzmonopoly.example.com} {
+    encode gzip zstd
+
+    # API and WebSocket proxy to Colyseus server
+    handle /colyseus/* {
+        reverse_proxy server:2567
+    }
+
+    handle /ws/* {
+        reverse_proxy server:2567
+    }
+
+    handle /health {
+        reverse_proxy server:2567
+    }
+
+    # Static assets fallback or frontend reverse proxy
+    handle {
+        respond "UzMonopoly API Gateway" 200
+    }
+}
