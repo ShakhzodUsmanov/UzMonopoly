@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import type { GameState, TileDefinition, GameEvent, TokenId } from '@uzmonopoly/shared';
+import type { GameState, TileDefinition, GameEvent, TokenId, CardDefinition } from '@uzmonopoly/shared';
+import { BOARD_TILES, IMKON_CARDS, XAZINA_CARDS } from '@uzmonopoly/engine';
 import { DICTIONARY, type Locale } from './i18n.js';
 import { networkService, type LobbyInfo } from './services/network.js';
+import { audioService } from './services/audio.js';
 import { HomeView } from './components/Home/HomeView.js';
 import { RoomLobbyView } from './components/Lobby/RoomLobbyView.js';
 import { GameBoard } from './components/Board/GameBoard.js';
@@ -9,8 +11,14 @@ import { GameConsole } from './components/Console/GameConsole.js';
 import { PlayerList } from './components/Players/PlayerList.js';
 import { EventLogAndChat } from './components/Chat/EventLogAndChat.js';
 import { PropertyCardModal } from './components/Board/PropertyCardModal.js';
-import confetti from 'canvas-confetti';
-import { LogOut } from 'lucide-react';
+import { BuyDecisionModal } from './components/Modals/BuyDecisionModal.js';
+import { AuctionModal } from './components/Modals/AuctionModal.js';
+import { TradeModal } from './components/Modals/TradeModal.js';
+import { CardDrawnModal } from './components/Modals/CardDrawnModal.js';
+import { PropertyManagementModal } from './components/Modals/PropertyManagementModal.js';
+import { DebtModal } from './components/Modals/DebtModal.js';
+import { GameOverModal } from './components/Modals/GameOverModal.js';
+import { LogOut, Volume2, VolumeX, ArrowLeftRight } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [locale, setLocale] = useState<Locale>('uz');
@@ -24,6 +32,10 @@ export const App: React.FC = () => {
     { id: string; sender: string; text: string; color: string; time: string }[]
   >([]);
   const [selectedTile, setSelectedTile] = useState<TileDefinition | null>(null);
+  const [managedTile, setManagedTile] = useState<TileDefinition | null>(null);
+  const [activeCard, setActiveCard] = useState<CardDefinition | null>(null);
+  const [isTradeOpen, setIsTradeOpen] = useState<boolean>(false);
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(audioService.enabled);
   const [myPlayerId] = useState<string>('player-me');
   const [turnTimeLeft, setTurnTimeLeft] = useState<number>(60);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -40,18 +52,36 @@ export const App: React.FC = () => {
       setScreen('game');
       setTurnTimeLeft(state.phase === 'AUCTION' ? 20 : 60);
 
-      // Trigger confetti on Victory
-      if (state.phase === 'GAME_OVER') {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-        });
+      // Auto-open trade modal if someone targets me with a trade
+      if (state.pendingTrade && state.pendingTrade.targetId === myPlayerId) {
+        setIsTradeOpen(true);
       }
     };
 
     networkService.onGameEvent = (ev) => {
       setEvents((prev) => [...prev, ev]);
+
+      // Sound design triggers from game events
+      if (ev.type === 'MOVE') {
+        audioService.playTokenStep();
+      } else if (ev.type === 'BUY_PROPERTY' || ev.type === 'BUILD') {
+        audioService.playCoin();
+      } else if (ev.type === 'GO_TO_JAIL' || ev.type === 'THREE_DOUBLES_TO_JAIL') {
+        audioService.playJailSlam();
+      } else if (ev.type === 'BANKRUPTCY') {
+        audioService.playBankruptcy();
+      }
+
+      // Check if event is a card drawn event
+      if (ev.type === 'CARD_DRAWN' && ev.data?.cardId) {
+        const cardId = ev.data.cardId as number;
+        const cardType = ev.data.cardType as 'imkon' | 'xazina';
+        const cardList = cardType === 'imkon' ? IMKON_CARDS : XAZINA_CARDS;
+        const card = cardList.find((c) => c.id === cardId);
+        if (card) {
+          setActiveCard(card);
+        }
+      }
     };
 
     networkService.onChatMessage = (msg) => {
@@ -66,7 +96,7 @@ export const App: React.FC = () => {
     return () => {
       networkService.leave();
     };
-  }, []);
+  }, [myPlayerId]);
 
   // Turn timer countdown effect
   useEffect(() => {
@@ -79,12 +109,17 @@ export const App: React.FC = () => {
     return () => clearInterval(interval);
   }, [screen, gameState?.phase, gameState?.seq]);
 
+  // Audio mute toggle
+  const handleToggleSound = () => {
+    const newState = audioService.toggleMute();
+    setSoundEnabled(newState);
+  };
+
   // Actions
   const handleCreateRoom = async (playerName: string, maxPlayers: number, isPrivate: boolean) => {
     try {
       await networkService.createOnlineRoom(playerName, maxPlayers, isPrivate);
     } catch {
-      // Fallback to solo game if local server is not connected
       networkService.startSoloGame(playerName);
     }
   };
@@ -92,8 +127,9 @@ export const App: React.FC = () => {
   const handleJoinRoom = async (roomCode: string, playerName: string) => {
     try {
       await networkService.joinOnlineRoom(roomCode, playerName);
-    } catch (err: any) {
-      setErrorMessage(err.message || 'Xonaga ulanishda xatolik yuz berdi');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Xonaga ulanishda xatolik yuz berdi';
+      setErrorMessage(msg);
       setTimeout(() => setErrorMessage(null), 3000);
     }
   };
@@ -103,22 +139,27 @@ export const App: React.FC = () => {
   };
 
   const handleReadyToggle = () => {
+    audioService.playClick();
     networkService.sendAction({ type: 'ready' });
   };
 
   const handleSetToken = (token: TokenId, color: string) => {
+    audioService.playClick();
     networkService.sendAction({ type: 'setToken', token, color });
   };
 
   const handleKickPlayer = (playerId: string) => {
+    audioService.playClick();
     networkService.sendAction({ type: 'kickPlayer', playerId });
   };
 
   const handleStartGame = () => {
+    audioService.playClick();
     networkService.sendAction({ type: 'startGame' });
   };
 
   const handleLeave = () => {
+    audioService.playClick();
     networkService.leave();
     setScreen('home');
     setGameState(null);
@@ -142,6 +183,17 @@ export const App: React.FC = () => {
 
     setChatMessages((prev) => [...prev, newMsg]);
     networkService.sendAction({ type: 'chat', text });
+  };
+
+  // Tile click handling: inspect vs manage
+  const handleTileClick = (tile: TileDefinition) => {
+    audioService.playClick();
+    const state = gameState?.tiles[tile.index];
+    if (state?.ownerId === myPlayerId) {
+      setManagedTile(tile);
+    } else {
+      setSelectedTile(tile);
+    }
   };
 
   return (
@@ -223,6 +275,28 @@ export const App: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              {/* Quick Trade Button */}
+              <button
+                className="btn btn-outline"
+                style={{ padding: '6px 12px', fontSize: 12 }}
+                onClick={() => setIsTradeOpen(true)}
+                title={t.trade}
+              >
+                <ArrowLeftRight size={14} color="#F59E0B" />
+                <span>{t.trade}</span>
+              </button>
+
+              {/* Sound Toggle */}
+              <button
+                className="btn btn-outline"
+                style={{ padding: '6px 10px', fontSize: 12 }}
+                onClick={handleToggleSound}
+                title={soundEnabled ? 'Ovozni o‘chirish' : 'Ovozni yoqish'}
+              >
+                {soundEnabled ? <Volume2 size={15} color="#10B981" /> : <VolumeX size={15} color="#94A3B8" />}
+              </button>
+
+              {/* Language Selector */}
               <select
                 value={locale}
                 onChange={(e) => setLocale(e.target.value as Locale)}
@@ -242,6 +316,7 @@ export const App: React.FC = () => {
                 <option value="en" style={{ background: '#0F172A' }}>English</option>
               </select>
 
+              {/* Leave Room Button */}
               <button
                 className="btn btn-outline"
                 style={{ padding: '6px 12px', fontSize: 12 }}
@@ -278,13 +353,18 @@ export const App: React.FC = () => {
             <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <GameBoard
                 gameState={gameState}
-                selectedTileIndex={selectedTile?.index}
-                onTileClick={(tile) => setSelectedTile(tile)}
+                selectedTileIndex={selectedTile?.index ?? managedTile?.index}
+                onTileClick={handleTileClick}
                 centerContent={
                   <GameConsole
                     gameState={gameState}
                     myPlayerId={myPlayerId}
-                    onAction={(action) => networkService.sendAction(action)}
+                    onAction={(action) => {
+                      if (action.type === 'rollDice') {
+                        audioService.playDiceRoll();
+                      }
+                      networkService.sendAction(action);
+                    }}
                     t={t}
                     turnTimeLeft={turnTimeLeft}
                   />
@@ -306,7 +386,92 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* Property Inspection Modal */}
+      {/* MODAL 1: Buy Decision Modal */}
+      {gameState?.phase === 'BUY_DECISION' && (
+        <BuyDecisionModal
+          gameState={gameState}
+          tile={BOARD_TILES[gameState.players[gameState.turnIndex]?.position ?? 0]!}
+          myPlayerId={myPlayerId}
+          onAction={(action) => networkService.sendAction(action)}
+          locale={locale}
+          t={t}
+        />
+      )}
+
+      {/* MODAL 2: Live Auction Modal */}
+      {gameState?.phase === 'AUCTION' && gameState.auction && (
+        <AuctionModal
+          gameState={gameState}
+          myPlayerId={myPlayerId}
+          onAction={(action) => networkService.sendAction(action)}
+          locale={locale}
+          t={t}
+          turnTimeLeft={turnTimeLeft}
+        />
+      )}
+
+      {/* MODAL 3: Trade & Negotiation Modal */}
+      {isTradeOpen && gameState && (
+        <TradeModal
+          gameState={gameState}
+          myPlayerId={myPlayerId}
+          onAction={(action) => networkService.sendAction(action)}
+          onClose={() => setIsTradeOpen(false)}
+          locale={locale}
+          t={t}
+        />
+      )}
+
+      {/* MODAL 4: Imkon / Xazina Card Drawn Modal */}
+      {activeCard && (
+        <CardDrawnModal
+          card={activeCard}
+          onClose={() => setActiveCard(null)}
+          locale={locale}
+          t={t}
+        />
+      )}
+
+      {/* MODAL 5: Property Management (Build / Mortgage / Sell) */}
+      {managedTile && gameState && (
+        <PropertyManagementModal
+          tile={managedTile}
+          gameState={gameState}
+          myPlayerId={myPlayerId}
+          onAction={(action) => networkService.sendAction(action)}
+          onClose={() => setManagedTile(null)}
+          locale={locale}
+          t={t}
+        />
+      )}
+
+      {/* MODAL 6: Debt Settlement & Liquidation Modal */}
+      {gameState?.phase === 'DEBT' && gameState.pendingDebt && (
+        <DebtModal
+          gameState={gameState}
+          myPlayerId={myPlayerId}
+          onAction={(action) => networkService.sendAction(action)}
+          locale={locale}
+          t={t}
+        />
+      )}
+
+      {/* MODAL 7: Game Over / Victory Celebration Modal */}
+      {gameState?.phase === 'GAME_OVER' && (
+        <GameOverModal
+          gameState={gameState}
+          onReturnToLobby={() => {
+            handleLeave();
+          }}
+          onBackHome={() => {
+            handleLeave();
+          }}
+          locale={locale}
+          t={t}
+        />
+      )}
+
+      {/* Property Inspection Modal (when inspecting unowned or other player's property) */}
       {selectedTile && (
         <PropertyCardModal
           tile={selectedTile}

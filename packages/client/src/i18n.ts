@@ -67,6 +67,129 @@ export interface Translations {
   congratulations: string;
   newGame: string;
 
+  // Trading
+  trade: string;
+  proposeTrade: string;
+  tradeWith: string;
+  myOffer: string;
+  myRequest: string;
+  acceptTrade: string;
+  declineTrade: string;
+  noTradePartners: string;
+
+  // Debt & Bankruptcy
+  debtTitle: string;
+  debtAmount: string;
+  creditor: string;
+  payDebt: string;
+  declareBankruptcy: string;
+  needToRaise: string;
+
+  // Balance
+  currentBalance: string;
+  balanceAfter: string;
+
+  // Modals
+  buyModal: {
+    header: string;
+    thinking: string;
+  };
+  auctionModal: {
+    header: string;
+    currentBid: string;
+    noBids: string;
+    highBidder: string;
+    you: string;
+    beFirst: string;
+    participants: string;
+    quickBid: string;
+    bid: string;
+    youPassed: string;
+  };
+  tradeModal: {
+    header: string;
+    receivedProposal: string;
+    proposalNotice: string;
+    theyGive: string;
+    theyWant: string;
+    accept: string;
+    reject: string;
+    waitingResponse: string;
+    reviewingNotice: string;
+    cancelProposal: string;
+    tradeWith: string;
+    iGive: string;
+    iGet: string;
+    money: string;
+    properties: string;
+    noProperties: string;
+    sendProposal: string;
+  };
+  cardModal: {
+    imkonTitle: string;
+    xazinaTitle: string;
+    understand: string;
+  };
+  propertyModal: {
+    header: string;
+    noBuildings: string;
+    mortgagedBadge: string;
+    construction: string;
+    buildBranch: string;
+    mortgageSection: string;
+    mortgage: string;
+    unmortgage: string;
+  };
+  debtModal: {
+    header: string;
+    creditor: string;
+    bank: string;
+    remainingToCollect: string;
+    payFullDebt: string;
+    liquidationHelp: string;
+    sellBuildings: string;
+    mortgageProperties: string;
+    declareBankruptcy: string;
+    confirmBankruptcy: string;
+  };
+  gameOverModal: {
+    victoryTitle: string;
+    totalCapital: string;
+    propertiesOwned: string;
+    branchesBuilt: string;
+    turnsPlayed: string;
+    playAgain: string;
+    homeMenu: string;
+  };
+  propertyCard: {
+    baseRent: string;
+    fullGroupRent: string;
+    mortgageValue: string;
+    house: string;
+    hotel: string;
+  };
+
+  // Why Can't I Reasons
+  reasons: {
+    reasonNotOwner: string;
+    reasonNeedMonopoly: string;
+    reasonGroupMortgaged: string;
+    reasonMaxBuildings: string;
+    reasonEvenBuild: string;
+    reasonInsufficientCash: string;
+    reasonNoBuildings: string;
+    reasonEvenSell: string;
+    reasonAlreadyMortgaged: string;
+    reasonBuildingsExist: string;
+    reasonNotMortgaged: string;
+    reasonAlreadyHighBidder: string;
+  };
+
+  // Cards & Chance
+  chanceCard: string;
+  chestCard: string;
+  continueBtn: string;
+
   // UI Panels
   playersTab: string;
   eventsTab: string;
@@ -158,6 +281,123 @@ export const DICTIONARY: Record<Locale, Translations> = {
     congratulations: 'Tabriklaymiz!',
     newGame: 'Yangi o‘yin',
 
+    trade: 'Almashish (Savdo)',
+    proposeTrade: 'Taklif yuborish',
+    tradeWith: 'Kim bilan almashmoqchisiz?',
+    myOffer: 'Siz taklif qilasiz:',
+    myRequest: 'Siz so‘raysiz:',
+    acceptTrade: 'Qabul qilish',
+    declineTrade: 'Rad etish',
+    noTradePartners: 'Almashish uchun faol o‘yinchilar yo‘q',
+
+    debtTitle: 'Qarzni to‘lash talab qilinadi!',
+    debtAmount: 'Qarz miqdori:',
+    creditor: 'Kreditor:',
+    payDebt: 'Qarzni to‘lash',
+    declareBankruptcy: 'Bankrot deb e‘lon qilish',
+    needToRaise: 'Mablag‘ yetmayapti. Bino sotish yoki mulkni garovga qo‘yish kerak.',
+
+    currentBalance: 'Joriy hisobingiz',
+    balanceAfter: 'Xariddan keyingi qoldiq',
+
+    buyModal: {
+      header: 'MULKNI XARID QILISH',
+      thinking: 'qaror qabul qilmoqda...',
+    },
+    auctionModal: {
+      header: 'MULK AUKSIONI',
+      currentBid: 'Eng yuqori taklif',
+      noBids: 'Hozircha takliflar yo‘q',
+      highBidder: 'Yetakchi o‘yinchi',
+      you: 'Siz',
+      beFirst: 'Birinchi bo‘lib taklif bering!',
+      participants: 'Ishtirokchilar',
+      quickBid: 'Tezkor stavka',
+      bid: 'Taklif',
+      youPassed: 'Siz ushbu auksionda pas bergansiz',
+    },
+    tradeModal: {
+      header: 'AYIRBOSHLASH (SAVDO)',
+      receivedProposal: 'KELIB TUSHGAN TAKLIF',
+      proposalNotice: 'quyidagi shartlar bilan almashishni taklif qilmoqda',
+      theyGive: 'U taklif qiladi',
+      theyWant: 'U so‘raydi',
+      accept: 'Taklifni qabul qilish',
+      reject: 'Taklifni rad etish',
+      waitingResponse: 'Javob kutilmoqda...',
+      reviewingNotice: 'siz yuborgan taklifni ko‘rib chiqmoqda.',
+      cancelProposal: 'Taklifni qaytarib olish',
+      tradeWith: 'Hamkor',
+      iGive: 'Men beraman',
+      iGet: 'Men olaman',
+      money: 'Mablag‘ (so‘m)',
+      properties: 'Mulklar ro‘yxati',
+      noProperties: 'Mavjud mulklar yo‘q',
+      sendProposal: 'Ayirboshlash taklifini yuborish',
+    },
+    cardModal: {
+      imkonTitle: 'IMKON KARTASI',
+      xazinaTitle: 'XAZINA KARTASI',
+      understand: 'Tushunarli, davom etish',
+    },
+    propertyModal: {
+      header: 'MULKNI BOSHQARISH',
+      noBuildings: 'Hozircha binolar yo‘q',
+      mortgagedBadge: 'GAROVGA QO‘YILGAN',
+      construction: 'Qurilish boshqaruvi',
+      buildBranch: 'Filial qurish',
+      mortgageSection: 'Garov va kredit',
+      mortgage: 'Garovga qo‘yish',
+      unmortgage: 'Garovdan chiqarish',
+    },
+    debtModal: {
+      header: 'QARZNI TO‘LASH TALAB QILINADI!',
+      creditor: 'Kreditor',
+      bank: 'O‘zbekiston Banki',
+      remainingToCollect: 'Yig‘ish kerak bo‘lgan summa',
+      payFullDebt: 'Qarzni to‘liq uzish',
+      liquidationHelp: 'Mablag‘ yetarli emas. Bino soting yoki mulkni garovga qo‘ying:',
+      sellBuildings: 'Sotiladigan binolar',
+      mortgageProperties: 'Garovga qo‘yiladigan mulklar',
+      declareBankruptcy: 'Bankrot deb tan olish',
+      confirmBankruptcy: 'Haqiqatan ham bankrotlik e‘lon qilmoqchimisiz? Barcha mulklaringiz musodara qilinadi!',
+    },
+    gameOverModal: {
+      victoryTitle: 'O‘YIN G‘OLIBI ANIQLANDI!',
+      totalCapital: 'Umumiy boylik',
+      propertiesOwned: 'Egalikdagi mulklar',
+      branchesBuilt: 'Qurilgan filiallar',
+      turnsPlayed: 'Yurishlar soni',
+      playAgain: 'Qayta o‘ynash',
+      homeMenu: 'Bosh sahifaga qaytish',
+    },
+    propertyCard: {
+      baseRent: 'Oddiy ijara',
+      fullGroupRent: 'Monopoliya bilan ijara',
+      mortgageValue: 'Garov qiymati',
+      house: 'filial',
+      hotel: 'Bosh ofis (Mehmonxona)',
+    },
+
+    reasons: {
+      reasonNotOwner: 'Siz bu mulkning egasi emassiz',
+      reasonNeedMonopoly: 'Guruhning barcha mulklariga egalik qilish shart',
+      reasonGroupMortgaged: 'Guruhda garovdagi mulk bor, avval uni qutqaring',
+      reasonMaxBuildings: 'Maksimal bino allaqachon qurilgan',
+      reasonEvenBuild: 'Qurilish bir tekis bo‘lishi shart (farq 1 tadan oshmasin)',
+      reasonInsufficientCash: 'Mablag‘ yetarli emas',
+      reasonNoBuildings: 'Mulkda sotish uchun binolar yo‘q',
+      reasonEvenSell: 'Binolar bir tekis sotilishi shart',
+      reasonAlreadyMortgaged: 'Mulk allaqachon garovga qo‘yilgan',
+      reasonBuildingsExist: 'Guruhda binolar bor, avval ularni soting',
+      reasonNotMortgaged: 'Mulk garovda emas',
+      reasonAlreadyHighBidder: 'Siz allaqachon eng yuqori taklif bergansiz',
+    },
+
+    chanceCard: 'Imkoniyat kartasi',
+    chestCard: 'Xazina kartasi',
+    continueBtn: 'Tushunarli, davom etish',
+
     playersTab: 'O‘yinchilar',
     eventsTab: 'Voqealar',
     chatTab: 'Chat',
@@ -191,25 +431,25 @@ export const DICTIONARY: Record<Locale, Translations> = {
     createRoom: 'Создать комнату',
     joinRoom: 'Войти по коду',
     quickPlay: 'Быстрая игра',
-    soloPractice: 'Игра против ботов',
+    soloPractice: 'Тренировка с ботами',
     roomCode: 'Код комнаты',
     enterRoomCode: 'Введите 5-значный код',
     enterNickname: 'Ваше имя или никнейм',
     maxPlayers: 'Количество игроков',
-    turnTimer: 'Таймер хода',
+    turnTimer: 'Время на ход',
     mode: 'Режим игры',
-    modeFull: 'Полная классическая',
-    modeShort: 'Быстрая партия',
-    privateRoom: 'Приватная (только по коду)',
-    publicRoom: 'Публичная комната',
-    copyCode: 'Скопировать код',
+    modeFull: 'Полный классический',
+    modeShort: 'Быстрый матч',
+    privateRoom: 'Приватная комната (по коду)',
+    publicRoom: 'Открытая комната',
+    copyCode: 'Копировать код',
     codeCopied: 'Код скопирован!',
     shareLink: 'Поделиться ссылкой',
     linkCopied: 'Ссылка скопирована!',
     leaveRoom: 'Покинуть комнату',
 
     lobbyTitle: 'Лобби ожидания',
-    waitingPlayers: 'Ожидание игроков...',
+    waitingPlayers: 'Ожидание подключения игроков...',
     chooseToken: 'Выберите фишку',
     chooseColor: 'Выберите цвет',
     ready: 'Готов',
@@ -219,92 +459,209 @@ export const DICTIONARY: Record<Locale, Translations> = {
     needMorePlayers: 'Нужно минимум 2 игрока',
     notAllReady: 'Все игроки должны нажать «Готов»',
     kick: 'Исключить',
-    hostBadge: 'Хост',
+    hostBadge: 'Создатель',
     youBadge: 'Вы',
-    botBadge: 'Бот',
+    botBadge: 'AI Бот',
 
     yourTurn: 'Ваш ход!',
-    waitingTurn: 'Ход другого игрока',
+    waitingTurn: 'Ход соперника...',
     rollDice: 'Бросить кубики',
-    buyProperty: 'Купить компанию',
-    declineBuy: 'Выставить на аукцион',
+    buyProperty: 'Купить актив',
+    declineBuy: 'На аукцион',
     auction: 'Аукцион',
     passAuction: 'Пас',
     bid: 'Сделать ставку',
     endTurn: 'Завершить ход',
     inJail: 'В тюрьме',
-    payJailFine: 'Выйти под залог (50)',
-    useJailCard: 'Использовать карту выхода',
-    manageProperties: 'Управление имуществом',
+    payJailFine: 'Заплатить штраф (50)',
+    useJailCard: 'Карточка выхода из тюрьмы',
+    manageProperties: 'Управление активами',
     mortgage: 'Заложить',
-    unmortgage: 'Выкупить',
+    unmortgage: 'Выкупить из залога',
     buildHouse: 'Построить филиал',
     sellHouse: 'Продать филиал',
     bankrupt: 'Банкрот!',
     victory: 'Победа!',
-    winnerDeclared: 'Победитель определен!',
+    winnerDeclared: 'Победитель определён!',
     congratulations: 'Поздравляем!',
-    newGame: 'В главное меню',
+    newGame: 'Главное меню',
+
+    trade: 'Обмен (Сделка)',
+    proposeTrade: 'Предложить сделку',
+    tradeWith: 'Партнер по сделке:',
+    myOffer: 'Вы отдаёте:',
+    myRequest: 'Вы получаете:',
+    acceptTrade: 'Принять сделку',
+    declineTrade: 'Отклонить сделку',
+    noTradePartners: 'Нет доступных игроков для торговли',
+
+    debtTitle: 'Необходимо погасить долг!',
+    debtAmount: 'Сумма долга:',
+    creditor: 'Кредитор:',
+    payDebt: 'Оплатить долг',
+    declareBankruptcy: 'Объявить банкротство',
+    needToRaise: 'Недостаточно денег. Продайте филиалы или заложите активы.',
+
+    currentBalance: 'Текущий баланс',
+    balanceAfter: 'Баланс после покупки',
+
+    buyModal: {
+      header: 'ПОКУПКА АКТИВА',
+      thinking: 'принимает решение...',
+    },
+    auctionModal: {
+      header: 'АУКЦИОН АКТИВА',
+      currentBid: 'Текущая ставка',
+      noBids: 'Ставок пока нет',
+      highBidder: 'Лидер аукциона',
+      you: 'Вы',
+      beFirst: 'Сделайте первую ставку!',
+      participants: 'Участники',
+      quickBid: 'Быстрая ставка',
+      bid: 'Повысить',
+      youPassed: 'Вы спасовали на этом аукционе',
+    },
+    tradeModal: {
+      header: 'ОБМЕН И СДЕЛКИ',
+      receivedProposal: 'ВХОДЯЩЕЕ ПРЕДЛОЖЕНИЕ',
+      proposalNotice: 'предлагает обмен со следующими условиями',
+      theyGive: 'Партнер отдает',
+      theyWant: 'Партнер хочет',
+      accept: 'Принять сделку',
+      reject: 'Отклонить сделку',
+      waitingResponse: 'Ожидание ответа...',
+      reviewingNotice: 'рассматривает ваше предложение обмена.',
+      cancelProposal: 'Отозвать предложение',
+      tradeWith: 'С кем меняться',
+      iGive: 'Я отдаю',
+      iGet: 'Я получаю',
+      money: 'Деньги (so‘m)',
+      properties: 'Активы',
+      noProperties: 'Нет подходящих активов',
+      sendProposal: 'Отправить предложение',
+    },
+    cardModal: {
+      imkonTitle: 'КАРТОЧКА «ИМКОН»',
+      xazinaTitle: 'КАРТОЧКА «ХАЗИНА»',
+      understand: 'Понятно, продолжить',
+    },
+    propertyModal: {
+      header: 'УПРАВЛЕНИЕ АКТИВОМ',
+      noBuildings: 'Построек пока нет',
+      mortgagedBadge: 'В ЗАЛОГЕ',
+      construction: 'Строительство филиалов',
+      buildBranch: 'Построить филиал',
+      mortgageSection: 'Залог и выкуп',
+      mortgage: 'Заложить актив',
+      unmortgage: 'Выкупить из залога',
+    },
+    debtModal: {
+      header: 'ТРЕБУЕТСЯ ПОГАСИТЬ ДОЛГ!',
+      creditor: 'Кредитор',
+      bank: 'Банк Узбекистана',
+      remainingToCollect: 'Осталось собрать',
+      payFullDebt: 'Погасить долг полностью',
+      liquidationHelp: 'Средств не хватает. Продайте филиалы или заложите активы:',
+      sellBuildings: 'Продажа построек',
+      mortgageProperties: 'Залог активов',
+      declareBankruptcy: 'Сдаться (Банкротство)',
+      confirmBankruptcy: 'Вы уверены, что хотите объявить банкротство? Вы покинете игру!',
+    },
+    gameOverModal: {
+      victoryTitle: 'ПОБЕДА В ИГРЕ!',
+      totalCapital: 'Капитал победителя',
+      propertiesOwned: 'Куплено активов',
+      branchesBuilt: 'Построено филиалов',
+      turnsPlayed: 'Сделано ходов',
+      playAgain: 'Сыграть снова',
+      homeMenu: 'В главное меню',
+    },
+    propertyCard: {
+      baseRent: 'Обычная аренда',
+      fullGroupRent: 'Аренда с монополией',
+      mortgageValue: 'Стоимость залога',
+      house: 'филиал',
+      hotel: 'Отель (Штаб-квартира)',
+    },
+
+    reasons: {
+      reasonNotOwner: 'Вы не владеете этим активом',
+      reasonNeedMonopoly: 'Нужна полная монополия группы улиц',
+      reasonGroupMortgaged: 'В группе есть заложенный актив, выкупите его',
+      reasonMaxBuildings: 'Максимальный уровень (Отель) уже построен',
+      reasonEvenBuild: 'Строить нужно равномерно (разница не более 1 филиала)',
+      reasonInsufficientCash: 'Недостаточно сумов на балансе',
+      reasonNoBuildings: 'На активе нет построек для продажи',
+      reasonEvenSell: 'Продавать нужно равномерно по всей группе',
+      reasonAlreadyMortgaged: 'Актив уже находится в залоге',
+      reasonBuildingsExist: 'В группе есть филиалы, сначала продайте их',
+      reasonNotMortgaged: 'Актив не заложен',
+      reasonAlreadyHighBidder: 'Ваша ставка уже является наивысшей',
+    },
+
+    chanceCard: 'Карточка «Имкон»',
+    chestCard: 'Карточка «Хазина»',
+    continueBtn: 'Понятно, продолжить',
 
     playersTab: 'Игроки',
     eventsTab: 'События',
     chatTab: 'Чат',
-    chatPlaceholder: 'Напишите сообщение...',
+    chatPlaceholder: 'Написать сообщение...',
     sendChat: 'Отправить',
     cashLabel: 'Наличные',
     netWorthLabel: 'Капитал',
     propertyCount: 'Активы',
     rent: 'Аренда',
     price: 'Цена',
-    houses: 'филиала',
+    houses: 'филиалы',
     hotel: 'Штаб-квартира',
     mortgagedBadge: 'В ЗАЛОГЕ',
 
     tokens: {
-      doppi: 'Тюбетейка (Do‘ppi)',
-      choynak: 'Чайник (Choynak)',
-      qozon: 'Казан (Qozon)',
-      tarvuz: 'Арбуз (Tarvuz)',
-      damas: 'Дамас (Damas)',
-      tulpar: 'Тулпар (Tulpar)',
+      doppi: 'Do‘ppi (Тюбетейка)',
+      choynak: 'Choynak (Чайник)',
+      qozon: 'Qozon (Казан)',
+      tarvuz: 'Tarvuz (Арбуз)',
+      damas: 'Damas (Автомобиль)',
+      tulpar: 'Tulpar (Крылатый конь)',
     },
   },
 
   en: {
     appName: 'UzMonopoly',
     appSubtitle: 'Uzbek National Business Board Game',
-    tagline: '52 tiles featuring Uzbekistan cities, bazaars and top enterprises',
+    tagline: '52 tiles of cities, grand bazaars, and national enterprises',
     welcome: 'Welcome!',
 
     createRoom: 'Create Room',
-    joinRoom: 'Join by Code',
-    quickPlay: 'Quick Play',
-    soloPractice: 'Play vs Bots',
+    joinRoom: 'Join with Code',
+    quickPlay: 'Quick Match',
+    soloPractice: 'Practice vs Bots',
     roomCode: 'Room Code',
     enterRoomCode: 'Enter 5-character code',
-    enterNickname: 'Your nickname',
-    maxPlayers: 'Players count',
-    turnTimer: 'Turn timer',
+    enterNickname: 'Your name or nickname',
+    maxPlayers: 'Number of Players',
+    turnTimer: 'Turn Timer',
     mode: 'Game Mode',
-    modeFull: 'Classic Full',
-    modeShort: 'Fast Mode',
-    privateRoom: 'Private (code only)',
-    publicRoom: 'Public room',
+    modeFull: 'Full Classic',
+    modeShort: 'Speed Game',
+    privateRoom: 'Private Room (Code only)',
+    publicRoom: 'Public Room',
     copyCode: 'Copy Code',
     codeCopied: 'Code copied!',
     shareLink: 'Share Link',
     linkCopied: 'Link copied!',
     leaveRoom: 'Leave Room',
 
-    lobbyTitle: 'Game Lobby',
-    waitingPlayers: 'Waiting for players...',
+    lobbyTitle: 'Room Lobby',
+    waitingPlayers: 'Waiting for players to join...',
     chooseToken: 'Choose Token',
-    chooseColor: 'Choose Color',
+    chooseColor: 'Pick Color',
     ready: 'Ready',
-    notReady: 'Not Ready',
+    notReady: 'Waiting',
     toggleReady: 'Ready Up!',
     startGame: 'Start Game',
-    needMorePlayers: 'Need at least 2 players',
+    needMorePlayers: 'At least 2 players needed',
     notAllReady: 'All players must be ready',
     kick: 'Kick',
     hostBadge: 'Host',
@@ -333,6 +690,123 @@ export const DICTIONARY: Record<Locale, Translations> = {
     winnerDeclared: 'Winner Decided!',
     congratulations: 'Congratulations!',
     newGame: 'Main Menu',
+
+    trade: 'Trade Deal',
+    proposeTrade: 'Propose Trade',
+    tradeWith: 'Trade Partner:',
+    myOffer: 'You Offer:',
+    myRequest: 'You Request:',
+    acceptTrade: 'Accept Deal',
+    declineTrade: 'Decline',
+    noTradePartners: 'No active players available for trade',
+
+    debtTitle: 'Debt Settlement Required!',
+    debtAmount: 'Debt Amount:',
+    creditor: 'Creditor:',
+    payDebt: 'Pay Debt',
+    declareBankruptcy: 'Declare Bankruptcy',
+    needToRaise: 'Insufficient cash. Sell branches or mortgage properties to raise funds.',
+
+    currentBalance: 'Current Cash',
+    balanceAfter: 'Balance After Purchase',
+
+    buyModal: {
+      header: 'PROPERTY ACQUISITION',
+      thinking: 'is deciding...',
+    },
+    auctionModal: {
+      header: 'PROPERTY AUCTION',
+      currentBid: 'Highest Bid',
+      noBids: 'No bids yet',
+      highBidder: 'Leading Bidder',
+      you: 'You',
+      beFirst: 'Place the opening bid!',
+      participants: 'Bidders',
+      quickBid: 'Quick Raise',
+      bid: 'Bid',
+      youPassed: 'You passed on this auction',
+    },
+    tradeModal: {
+      header: 'TRADE & NEGOTIATION',
+      receivedProposal: 'INCOMING PROPOSAL',
+      proposalNotice: 'proposes a trade with the following terms',
+      theyGive: 'They Offer',
+      theyWant: 'They Want',
+      accept: 'Accept Deal',
+      reject: 'Reject Deal',
+      waitingResponse: 'Waiting for response...',
+      reviewingNotice: 'is reviewing your trade offer.',
+      cancelProposal: 'Cancel Proposal',
+      tradeWith: 'Trading Partner',
+      iGive: 'I Give',
+      iGet: 'I Get',
+      money: 'Money (so‘m)',
+      properties: 'Properties',
+      noProperties: 'No properties available',
+      sendProposal: 'Send Trade Proposal',
+    },
+    cardModal: {
+      imkonTitle: 'IMKON (CHANCE) CARD',
+      xazinaTitle: 'XAZINA (TREASURY) CARD',
+      understand: 'Understood, Continue',
+    },
+    propertyModal: {
+      header: 'MANAGE PROPERTY',
+      noBuildings: 'No branches yet',
+      mortgagedBadge: 'MORTGAGED',
+      construction: 'Branch Construction',
+      buildBranch: 'Build Branch',
+      mortgageSection: 'Mortgage & Redemption',
+      mortgage: 'Mortgage Property',
+      unmortgage: 'Unmortgage Property',
+    },
+    debtModal: {
+      header: 'DEBT SETTLEMENT REQUIRED!',
+      creditor: 'Creditor',
+      bank: 'Central Bank of Uzbekistan',
+      remainingToCollect: 'Remaining to Raise',
+      payFullDebt: 'Pay Off Debt in Full',
+      liquidationHelp: 'Insufficient cash. Sell branches or mortgage properties:',
+      sellBuildings: 'Sell Buildings',
+      mortgageProperties: 'Mortgage Properties',
+      declareBankruptcy: 'Declare Bankruptcy',
+      confirmBankruptcy: 'Are you sure you want to declare bankruptcy? You will be eliminated!',
+    },
+    gameOverModal: {
+      victoryTitle: 'MATCH WINNER DECLARED!',
+      totalCapital: 'Winner Net Worth',
+      propertiesOwned: 'Properties Acquired',
+      branchesBuilt: 'Branches Built',
+      turnsPlayed: 'Turns Played',
+      playAgain: 'Play Again',
+      homeMenu: 'Back to Home',
+    },
+    propertyCard: {
+      baseRent: 'Base Rent',
+      fullGroupRent: 'Full Monopoly Rent',
+      mortgageValue: 'Mortgage Value',
+      house: 'branch',
+      hotel: 'Headquarters',
+    },
+
+    reasons: {
+      reasonNotOwner: 'You do not own this property',
+      reasonNeedMonopoly: 'Complete monopoly required (all group properties)',
+      reasonGroupMortgaged: 'A property in the group is mortgaged; redeem it first',
+      reasonMaxBuildings: 'Maximum level (Headquarters) already reached',
+      reasonEvenBuild: 'Must build evenly across color group (max difference of 1)',
+      reasonInsufficientCash: 'Insufficient cash balance',
+      reasonNoBuildings: 'No branches to sell on this property',
+      reasonEvenSell: 'Must sell branches evenly across color group',
+      reasonAlreadyMortgaged: 'Property is already mortgaged',
+      reasonBuildingsExist: 'Group still has buildings; sell them first',
+      reasonNotMortgaged: 'Property is not mortgaged',
+      reasonAlreadyHighBidder: 'You are already the highest bidder',
+    },
+
+    chanceCard: 'Imkoniyat (Chance) Card',
+    chestCard: 'Xazina (Community Chest) Card',
+    continueBtn: 'Understood, Continue',
 
     playersTab: 'Players',
     eventsTab: 'Event Log',
