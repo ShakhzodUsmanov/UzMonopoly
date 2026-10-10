@@ -22,11 +22,21 @@ export interface LobbyInfo {
   }[];
 }
 
-const SERVER_URL =
-  (typeof import.meta !== 'undefined' && import.meta.env?.['VITE_SERVER_URL']) ||
-  (typeof window !== 'undefined' && window.location.hostname === 'localhost'
-    ? 'http://localhost:2567'
-    : 'http://localhost:2567');
+export function resolveServerUrl(): string {
+  if (typeof import.meta !== 'undefined' && import.meta.env?.['VITE_SERVER_URL']) {
+    return import.meta.env['VITE_SERVER_URL'];
+  }
+  if (typeof window !== 'undefined') {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:2567';
+    }
+    // Production default: connect to same host with appropriate protocol
+    return window.location.origin;
+  }
+  return 'http://localhost:2567';
+}
+
+export const SERVER_URL = resolveServerUrl();
 
 export class NetworkService {
   private client: ColyseusClient;

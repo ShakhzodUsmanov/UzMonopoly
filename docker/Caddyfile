@@ -1,21 +1,19 @@
-{$DOMAIN:uzmonopoly.example.com} {
+{$DOMAIN:api.uzmonopoly.uz} {
     encode gzip zstd
 
-    # API and WebSocket proxy to Colyseus server
-    handle /colyseus/* {
-        reverse_proxy server:2567
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
     }
 
-    handle /ws/* {
-        reverse_proxy server:2567
-    }
-
-    handle /health {
-        reverse_proxy server:2567
-    }
-
-    # Static assets fallback or frontend reverse proxy
-    handle {
-        respond "UzMonopoly API Gateway" 200
+    # Reverse proxy all HTTP API and WebSocket connections to Colyseus Game Server
+    reverse_proxy server:2567 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
     }
 }

@@ -1,4 +1,4 @@
-import { Room, Client } from 'colyseus';
+import { Room, Client, matchMaker } from 'colyseus';
 import crypto from 'node:crypto';
 import type {
   GameState,
@@ -20,7 +20,7 @@ import {
   getCurrentPlayer,
 } from '@uzmonopoly/engine';
 import { generateRoomCode } from '../utils/roomCode.js';
-import { DEFAULT_TURN_TIMEOUT, RECONNECTION_TIMEOUT } from '../config.js';
+import { DEFAULT_TURN_TIMEOUT, RECONNECTION_TIMEOUT, MAX_ROOMS } from '../config.js';
 
 export interface LobbyPlayer {
   id: string;
@@ -61,7 +61,12 @@ export class GameRoom extends Room {
   private reconnectTimers = new Map<string, NodeJS.Timeout>();
   private clientToPlayerId = new Map<string, string>();
 
-  onCreate(options: GameRoomOptions) {
+  async onCreate(options: GameRoomOptions) {
+    const existingRooms = await matchMaker.query({});
+    if (existingRooms.length >= MAX_ROOMS) {
+      throw new Error(`Server room capacity reached (max ${MAX_ROOMS} rooms)`);
+    }
+
     this.roomCode = options.roomCode || generateRoomCode();
     this.isPrivate = options.isPrivate ?? false;
     this.maxPlayers = Math.max(2, Math.min(6, options.maxPlayers ?? 6));

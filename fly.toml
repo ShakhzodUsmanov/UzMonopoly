@@ -1,0 +1,37 @@
+# Fly.io deployment configuration for UzMonopoly Game Server
+# Run `fly launch` or `fly deploy`
+
+app = "uzmonopoly-server"
+primary_region = "fra" # Frankfurt (optimal latency for Uzbekistan & Eurasia)
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "2567"
+  NODE_ENV = "production"
+
+[http_service]
+  internal_port = 2567
+  force_https = true
+  auto_stop_machines = false # Keeps WebSocket game connections persistent
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+  [http_service.concurrency]
+    type = "connections"
+    hard_limit = 1000
+    soft_limit = 800
+
+[[http_service.checks]]
+  interval = "30s"
+  timeout = "5s"
+  grace_period = "10s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1024mb"
